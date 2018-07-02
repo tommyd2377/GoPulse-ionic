@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Pulse
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background">
+  
+    <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+        <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+            <ion-label style="color: #04df04">Top Headlines</ion-label>
+                <ion-select class="background" style="color: #04df04" [(ngModel)]="category" interface="popover">
+                    <ion-option class="background" value="all" (ionSelect)="triggerAll()">US</ion-option>
+                    <ion-option value="business" (ionSelect)="triggerBusiness()">Business</ion-option>
+                    <ion-option value="entertainment" (ionSelect)="triggerEntertainment()">Entertainment</ion-option>
+                    <ion-option value="health" (ionSelect)="triggerHealth()">Health</ion-option>
+                    <ion-option value="sports" (ionSelect)="triggerSports()">Sports</ion-option>
+                    <ion-option value="science" (ionSelect)="triggerScience()">Science</ion-option>
+                    <ion-option value="technology" (ionSelect)="triggerTechnology()">Technology</ion-option>
+                </ion-select>
+        </ion-item>
+    </ion-list>
+
+    <div style="max-width: 600px; margin-right: auto; margin-left: auto" *ngIf="triggerBusinessArticles">
+        <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+            <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" *ngFor="let businessResult of businessResults"
+                (click)="businessArticlePage($event, businessResult)" padding-bottom text-wrap>
+                    <div *ngIf="businessResult?.urlToImage">
+                        <img [src]="businessResult?.urlToImage">
+                    </div>
+                <h1 style="color: white" padding-top>{{ businessResult?.title }}</h1>
+                <h3 style="color: #04df04" padding-top padding-bottom>{{ businessResult?.source.name }}</h3>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <div style="max-width: 600px; margin-right: auto; margin-left: auto" *ngIf="triggerAllArticles">
+        <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+            <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" *ngFor="let allResult of allResults"
+                (click)="allArticlePage($event, allResult)" text-wrap>
+                    <div *ngIf="allResult?.urlToImage">
+                        <img [src]="allResult?.urlToImage">
+                    </div>
+                <h1 style="color: white" padding-top>{{ allResult?.title }}</h1>
+                <h3 style="color: #04df04" padding-top padding-bottom>{{ allResult?.source.name }}</h3>
+            </ion-item>
+        </ion-list>
+    </div>
+              
+    <div style="max-width: 600px; margin-right: auto; margin-left: auto" *ngIf="triggerHealthArticles">
+        <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+            <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" *ngFor="let healthResult of healthResults"
+                (click)="healthArticlePage($event, healthResult)" text-wrap>
+                    <div *ngIf="healthResult?.urlToImage">
+                        <img [src]="healthResult?.urlToImage">
+                    </div>
+                <h1 style="color: white" padding-top>{{ healthResult?.title }}</h1>
+                <h3 style="color: #04df04" padding-top padding-bottom>{{ healthResult?.source.name }}</h3>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <div style="max-width: 600px; margin-right: auto; margin-left: auto" *ngIf="triggerSportsArticles">
+        <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+            <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" *ngFor="let sportsResult of sportsResults"
+                (click)="sportsArticlePage($event, sportsResult)" text-wrap>
+                    <div *ngIf="sportsResult?.urlToImage">
+                        <img [src]="sportsResult?.urlToImage">
+                    </div>
+                <h1 style="color: white" padding-top>{{ sportsResult?.title }}</h1>
+                <h3 style="color: #04df04" padding-top padding-bottom>{{ sportsResult?.source.name }}</h3>
+            </ion-item>
+        </ion-list>
+    </div>
+        
+    <div style="max-width: 600px; margin-right: auto; margin-left: auto" *ngIf="triggerTechnologyArticles">
+        <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+            <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" *ngFor="let technologyResult of technologyResults"
+                (click)="technologyArticlePage($event, technologyResult)" text-wrap>
+                    <div *ngIf="technologyResult?.urlToImage">
+                        <img [src]="technologyResult?.urlToImage">
+                    </div>
+                <h1 style="color: white" padding-top>{{ technologyResult?.title }}</h1>
+                <h3 style="color: #04df04" padding-top padding-bottom>{{ technologyResult?.source.name }}</h3>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <div style="max-width: 600px; margin-right: auto; margin-left: auto" *ngIf="triggerEntertainmentArticles">
+        <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+            <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" *ngFor="let entertainmentResult of entertainmentResults"
+                (click)="entertainmentArticlePage($event, entertainmentResult)" text-wrap>
+                    <div *ngIf="entertainmentResult?.urlToImage">
+                        <img [src]="entertainmentResult?.urlToImage">
+                    </div>
+                <h1 style="color: white" padding-top>{{ entertainmentResult?.title }}</h1>
+                <h3 style="color: #04df04" padding-top padding-bottom>{{ entertainmentResult?.source.name }}</h3>
+            </ion-item>
+        </ion-list>
+    </div>
+    
+    <div style="max-width: 600px; margin-right: auto; margin-left: auto" *ngIf="triggerScienceArticles">
+        <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+            <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" *ngFor="let scienceResult of scienceResults"
+                (click)="scienceArticlePage($event, scienceResult)" text-wrap>
+                    <div *ngIf="scienceResult?.urlToImage">
+                        <img [src]="scienceResult?.urlToImage">
+                    </div>                     
+                <h1 style="color: white" padding-top>{{ scienceResult?.title }}</h1>
+                <h3 style="color: #04df04" padding-top padding-bottom>{{ scienceResult?.source.name }}</h3>
+            </ion-item>
+        </ion-list>
+    </div>
+
+</ion-content>

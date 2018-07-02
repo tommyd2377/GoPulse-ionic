@@ -1,0 +1,59 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Search</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment style="max-width: 600px; margin-right: auto; margin-left: auto" [(ngModel)]="searchType">
+      <ion-segment-button (click)="showUserSearch()" value="userSearch">
+        Users
+      </ion-segment-button>
+      <ion-segment-button (click)="showPublisherSearch()" value="publisherSearch">
+        Publishers
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+
+
+<ion-content class="background">
+    <div style="max-width: 600px; margin-right: auto; margin-left: auto">
+
+  <div style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" [ngSwitch]="searchType">
+    <div *ngIf="searchingUsers">
+      <ion-searchbar *ngSwitchCase="'userSearch'" type="text" (ionInput)="searchUsers($event)" placeholder="search users..." class="input"></ion-searchbar>
+        <ion-list class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
+          <ion-item  *ngFor="let user of userResults" (click)="goToUserProfile($event, user)" class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
+            <ion-avatar item-start>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL">
+            </ion-avatar>
+            <h2 style="color: #04df04">{{ user?.fullname }}</h2>
+            <p style="color: #04df04">{{ user?.displayName }}</p>
+          </ion-item>
+        </ion-list>   
+      <div *ngIf="userResults?.length < 1">
+        <hr>
+          <p style="color: #04df04">No results found :(</p>
+        </div>
+    </div>
+          
+    <div *ngIf="searchingPublishers">
+      <ion-searchbar *ngSwitchCase="'publisherSearch'" type="text" (ionInput)="searchPublishers($event)" placeholder="search publishers..." class="input"></ion-searchbar>
+      <ion-list class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
+          <ion-item class="background" *ngFor="let publisher of publisherResults" style="max-width: 600px; margin-right: auto; margin-left: auto" (click)="publisherPage($event, publisher)">
+            <ion-thumbnail item-start>
+              <img src="{{ publisher?.image }}">
+            </ion-thumbnail>
+            <h2 style="color: #04df04">{{ publisher?.name }}</h2>
+          </ion-item>
+        </ion-list>    
+      <div *ngIf="publisherResults?.length < 1">
+        <hr>
+          <p style="color: #04df04">No results found :(</p>
+      </div>
+    </div>
+    </div>
+  </div>

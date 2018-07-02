@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ displayName }} Followers</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    
+  <ion-grid fixed>
+    <ion-list>
+      <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" *ngFor="let follower of followers | async" 
+        (click)="goToProfilePage($event, follower)" class="background" text-wrap padding-bottom>
+          <h1>{{ follower?.followerUsername }}</h1>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+
+</ion-content>

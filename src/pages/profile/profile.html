@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    
+    <ion-title>Profile</ion-title>
+      
+    <button ion-button (click)="goToSettingsPage()">
+      <ion-icon name="settings"></ion-icon>
+    </button>
+  
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background">
+
+  <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
+    
+    <ion-avatar item-start>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL">
+    </ion-avatar>
+        
+    <h2 style="color: white">{{ (userData | async)?.displayName }}</h2>
+    <p style="color: white">{{ (userData | async)?.fullname }}</p>
+    
+    <button (click)="goToFollowers()" ion-button icon-left>
+      <ion-icon name="people"></ion-icon>
+        <div>{{ (followerCount | async)?.length }} Followers</div>
+    </button>
+
+    <button (click)="goToFollowees()" ion-button icon-left>
+      <ion-icon name="people"></ion-icon>
+        <div>{{ (followeeCount | async)?.length }} Followees</div>
+    </button>
+  
+  </ion-item>
+
+  <ion-grid fixed>
+    <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto">
+      <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" *ngFor="let active of activity | async" 
+        (click)="goToDetailPage($event, active)" class="background" text-wrap padding-bottom>
+        
+      <h2 style="color: #04df04" *ngIf="active.twoThumbsUpIsTrue" padding-bottom>You shared an article</h2>
+      <h2 style="color: #04df04" *ngIf="active.changedMindIsTrue" padding-bottom>You shared an article that changed your perspective</h2>
+      <img *ngIf="active.twoThumbsUpIsTrue" [src]="active.urlToImage">
+      <img *ngIf="active.changedMindIsTrue" [src]="active.urlToImage">
+
+      <h2 style="color: #04df04" *ngIf="active.followedIsTrue" text-wrap  padding-bottom>{{ active.followerUsername }} started following you</h2>
+      <h2 style="color: #04df04" *ngIf="active.followingIsTrue" text-wrap  padding-bottom>You started following {{ active.followeeUsername }}</h2>
+            
+      <h1 style="color: white" *ngIf="active.twoThumbsUpIsTrue" padding-top>
+        {{ active.title }}
+      </h1>
+                
+      <h1 style="color: white" *ngIf="active.changedMindIsTrue" padding-top>
+        {{ active.title }}
+      </h1>
+              
+      <h3 style="color: #04df04" *ngIf="active.twoThumbsUpIsTrue" padding-top padding-bottom>{{ active.source.name }}</h3>
+      <h3 style="color: #04df04" *ngIf="active.changedMindIsTrue" padding-top padding-bottom>{{ active.source.name }}</h3>
+        
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+
+</ion-content>

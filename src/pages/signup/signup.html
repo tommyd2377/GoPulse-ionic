@@ -1,0 +1,41 @@
+<ion-header>
+  
+  <ion-navbar>
+    <ion-title>Signup</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="background">
+  <div style="max-width: 600px; margin-right: auto; margin-left: auto">
+  <br>
+  <form [formGroup]="userForm" class="background" (ngSubmit)="createUser()">
+    <ion-item class="background">
+    <ion-label for='email' style="color: white" floating>Email</ion-label>
+    <ion-input style="color: white" type="email" [(ngModel)]="email" formControlName="email"></ion-input>
+  </ion-item>
+  <ion-item class="background">
+    <ion-label style="color: white" for="fullName" floating>Name</ion-label>
+    <ion-input style="color: white" type="text" [(ngModel)]="fullName" [ngModelOptions]="{standalone: true}"></ion-input>
+  </ion-item>
+  <ion-item class="background">
+    <ion-label style="color: white" for="displayName" floating>Username</ion-label>
+    <ion-input  style="color: white" type="text" [(ngModel)]="displayName" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item class="background">
+    <ion-label  style="color: white" for="password" floating>Password</ion-label>
+    <ion-input  style="color: white" type="password" [(ngModel)]="password" formControlName="password" required></ion-input>
+    </ion-item>
+    <br>
+    <div style="color: red" *ngIf="formErrors.email">
+        {{ formErrors.email }}
+      </div>
+    <div  style="color: red" *ngIf="formErrors.password">
+        {{ formErrors.password }}
+      </div>
+      <br>
+      <br>
+    <button class="button" ion-button type="submit" block [disabled]="!userForm.valid">Sign Up</button>    
+  </form>
+</div>
+</ion-content>

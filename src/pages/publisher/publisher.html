@@ -1,0 +1,56 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ name }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="background">
+
+  <div style="max-width: 600px; margin-right: auto; margin-left: auto">
+    <img style="margin-left: auto; margin-right: auto; display: block" src="{{ image }}" padding no-border-bottom>
+    <p style="color:white; text-align: center" padding no-border-top>{{ description }}</p>
+
+    <ion-toolbar class="background" no-border-top>
+      <ion-segment class="background" [(ngModel)]="articleType">
+        <ion-segment-button (click)="showTop()" value="top">
+          Top Articles
+        </ion-segment-button>
+        <ion-segment-button (click)="showAll()" value="all">
+          All Articles
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+
+
+  <div style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" [ngSwitch]="articleType">
+    
+    <div *ngIf="toggleTop">
+      <ion-list class="background" *ngSwitchCase="'top'">
+        <ion-item class="background" *ngFor="let topResult of topResults"
+          (click)="topArticlePage($event, topResult)" text-wrap>
+            <div *ngIf="topResult?.urlToImage">
+              <img [src]="topResult?.urlToImage">
+            </div>
+          <h1 style="color: white" padding-top>{{ topResult?.title }}</h1>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngIf="toggleAll">
+      <ion-list class="background" *ngSwitchCase="'all'">
+        <ion-item class="background" *ngFor="let allResult of allResults"
+          (click)="allArticlePage($event, allResult)" text-wrap>
+            <div *ngIf="allResult?.urlToImage">
+              <img [src]="allResult?.urlToImage">
+            </div>
+          <h1 style="color: white" padding-top>{{ allResult?.title }}</h1>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+  </div>
+    
+
+

@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>GoPulse</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+  <ion-content padding class="background">
+    
+    <div padding-top style="max-width: 600px; margin-right: auto; margin-left: auto">
+      <h1 padding-top style="color: white">Welcome to GoPulse!</h1>
+      
+      <p padding-top style="color: white">GoPulse is a news distribution platform that was built from the ground up
+        to be ad free and to prevent filter bubbles. The platform only indexes articles from
+        publishers that have been carefully vetted. With GoPulse you can:
+      </p>
+      
+      <ul style="color: white">
+        <li>Get a much broader perspective on current events</li>
+        <li>Discover, read and share the latest news from a growing list of mainstream publishers</li>
+        <li>Follow other GoPulse users to get article recomendations designed to keep you informed and open minded</li>
+      </ul>
+    
+      <p padding-top style="color: white">New to GoPulse?</p>
+        <button class="button" (click)="signUp()" ion-button block>Sign Up</button>
+    
+      <p style="color: white">Already a have an account?</p>
+        <button class="button" (click)="login()" ion-button block>Login</button>
+    
+    </div>
+
+  </ion-content>
