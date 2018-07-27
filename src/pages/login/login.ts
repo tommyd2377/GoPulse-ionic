@@ -17,7 +17,6 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
               private afAuth: AngularFireAuth) {
-    
     this.afAuth.authState.subscribe( (user) => {
       if (user) {
         this.navCtrl.setRoot(TabsPage,{})

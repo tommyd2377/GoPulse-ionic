@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TabsPage } from '../tabs/tabs';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
 
 @IonicPage()
@@ -54,16 +54,16 @@ export class SignupPage {
     console.log('ionViewDidLoad SignupPage')
   }
 
-  createUser(email, password) {
+  createUser() {
     return this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
       .then(() => {
-        var user = firebase.auth().currentUser
+        let user = firebase.auth().currentUser
         user.sendEmailVerification();
         user.updateProfile({
           displayName: (this.displayName),
           photoURL: 'some/url',
-      })
-      var uid = user.uid;
+        })
+      let uid = user.uid;
       const userData = this.db.object('user-data/' + uid);
       userData.set({ fullname: (this.fullName), displayName: (this.displayName), 
       email: (this.email), uid: (uid)});
@@ -72,7 +72,9 @@ export class SignupPage {
   }
   
   onValueChanged(data?: any) {
-    if (!this.userForm) { return; }
+    if (!this.userForm) { 
+      return; 
+    }
     const form = this.userForm;
     for (const field in this.formErrors) {
       this.formErrors[field] = '';
@@ -94,7 +96,7 @@ export class SignupPage {
   validationMessages = {
     'email': {
       'required':      'Email is required.',
-      'email':         'Email must be a valid email.'
+      'email':         'Must be a valid email.'
     },
     'password': {
       'required':      'Password is required.',
@@ -104,4 +106,11 @@ export class SignupPage {
     }
   };
 }
+
+//In order for the platform to remain independent without ad revenue the service will cost $4.99 a month.
+//No one likes paywalls, but for a few dollars each month GoPulse can make a comitment to it's users that other 
+//digital services cannot: With GoPulse, the platform is the product and you are our customer.
+
+
+
 

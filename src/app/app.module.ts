@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { ThemeableBrowser, ThemeableBrowserOptions, ThemeableBrowserObject } from '@ionic-native/themeable-browser';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -32,8 +32,7 @@ import { UserFollowersPageModule } from '../pages/user-followers/user-followers.
 import { UserFolloweesPageModule } from '../pages/user-followees/user-followees.module';
 import { publisherLists } from '../publisher-list';
 
- 
-//News API key = f479cb7134e548bca82908661da32403
+ //News API key = f479cb7134e548bca82908661da32403
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
@@ -85,7 +84,7 @@ export const firebaseConfig = {
     SplashScreen,
     AngularFireDatabase,
     AuthProvider,
-    InAppBrowser,
+    ThemeableBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SearchProvider,
     publisherLists

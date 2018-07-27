@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar style="color: black">
+  <ion-navbar>
     <ion-title>{{ source.name }}</ion-title>
   </ion-navbar>
 
@@ -11,33 +11,35 @@
   <div style="max-width: 600px; margin-right: auto; margin-left: auto">
     
     <img src="{{ image }}"/>
+
+    <ion-row padding>
+      <ion-col>
+          <button ion-button (click)="openWebpage()">
+            <ion-icon name="open"></ion-icon>
+          </button>
+        </ion-col>
+    <ion-col>
+      <button click ion-button icon-left (click)="twoThumbsUp()">
+        <ion-icon name="share-alt"></ion-icon>
+        <div>{{ (voteCount | async)?.length }}</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left (click)="changedMind()">
+        <ion-icon name="swap"></ion-icon>
+        <div>{{ (cMCount | async)?.length }}</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left (click)="directSend()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</div>
+
     <h2 style="color: white" padding>{{ title }}</h2>
     <p style="color: white" padding>{{ description }}</p>
-    
-    <ion-row padding>
-        <ion-col>
-            <button ion-button (click)="openWebpage()">
-              <ion-icon name="open"></ion-icon>
-            </button>
-          </ion-col>
-      <ion-col>
-        <button click ion-button icon-left (click)="twoThumbsUp()">
-          <ion-icon name="share-alt"></ion-icon>
-          <div>{{ (voteCount | async)?.length }}</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left (click)="changedMind()">
-          <ion-icon name="swap"></ion-icon>
-          <div>{{ (cMCount | async)?.length }}</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left (click)="directSend()">
-          <ion-icon name="send"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </div>
+  
 
 </ion-content>

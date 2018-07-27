@@ -75,7 +75,7 @@ export class PublisherPage {
             }
           )}
 
-    getAllArticles() {
+  getAllArticles() {
     this.allUrl = 'https://newsapi.org/v2/everything?sources=' + this.id + '&language=en&pageSize=100&apiKey=' + this.apiKey;
       this.http.get(this.allUrl)
         .map(res => res.json())

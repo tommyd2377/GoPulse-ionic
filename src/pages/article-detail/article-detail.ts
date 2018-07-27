@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { ThemeableBrowser, ThemeableBrowserOptions, ThemeableBrowserObject } from '@ionic-native/themeable-browser';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
@@ -12,6 +12,8 @@ import * as firebase from 'firebase/app';
 })
 
 export class ArticleDetailPage {
+
+  options: ThemeableBrowserOptions;
 
   activity: Observable<any[]>;
   articleVotes: Observable<any[]>;
@@ -47,9 +49,9 @@ export class ArticleDetailPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private iab: InAppBrowser,
+              private themeableBrowser: ThemeableBrowser,
               private db: AngularFireDatabase) { }
-
+              
   ionViewDidLoad() {
     
     this.title;
@@ -71,8 +73,12 @@ export class ArticleDetailPage {
     this.cMCount = this.db.list("article-data/"+this.titleID+"-cm").valueChanges()
     this.dSCount = this.db.list("article-data/"+this.titleID+"-ds").valueChanges()
     //this.commentCount = this.db.list("article-data/"+this.titleID+"-comments").valueChanges()
+
+    
   
   }
+
+
 
   twoThumbsUp() {
 
@@ -93,7 +99,7 @@ export class ArticleDetailPage {
           followerActivity.push({ uid: (this.uid), username: (this.displayName),
           url: (this.url), description: (this.description), source: (this.source),
           title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
-          console.log(result.followerUid)}});
+        }});
   }
 
   changedMind() {
@@ -115,8 +121,7 @@ export class ArticleDetailPage {
           followerCMActivity.push({ uid: (this.uid), username: (this.displayName),
           url: (this.url), description: (this.description), source: (this.source),
           title: (this.title), urlToImage: (this.image), changedMindIsTrue: (true) });
-          console.log(result.followerUid)}});
-
+        }});
   }
 
   directSend() {
@@ -135,8 +140,73 @@ export class ArticleDetailPage {
     })
   }
 
+  
+
   openWebpage() {
-    this.iab.create(this.url);
+
+    const options: ThemeableBrowserOptions = {
+      statusbar: {
+          color: '#04df04'
+      },
+      toolbar: {
+          height: 44,
+          color: '#04df04'
+      },
+      title: {
+          color: '#003264ff',
+          showPageTitle: true
+      },
+      backButton: {
+          image: 'back',
+          imagePressed: 'back_pressed',
+          align: 'left',
+          event: 'backPressed'
+      },
+      forwardButton: {
+          image: 'forward',
+          imagePressed: 'forward_pressed',
+          align: 'left',
+          event: 'forwardPressed'
+      },
+      closeButton: {
+          image: 'close',
+          imagePressed: 'close_pressed',
+          align: 'left',
+          event: 'closePressed'
+      },
+      customButtons: [
+          {
+              image: 'share',
+              imagePressed: 'share_pressed',
+              align: 'right',
+              event: 'sharePressed'
+          }
+      ],
+      menu: {
+          image: 'menu',
+          imagePressed: 'menu_pressed',
+          title: 'Test',
+          cancel: 'Cancel',
+          align: 'right',
+          items: [
+              {
+                  event: 'helloPressed',
+                  label: 'Hello World!'
+              },
+              {
+                  event: 'testPressed',
+                  label: 'Test!'
+              }
+          ]
+      },
+      backButtonCanClose: true
+  };
+
+  const browser: ThemeableBrowserObject = this.themeableBrowser.create(this.url, '_blank', options);
+
+  browser.on('closePressed').subscribe(data => {
+    browser.close();
+  })
   }
 
 }

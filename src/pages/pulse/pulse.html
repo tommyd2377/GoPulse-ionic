@@ -12,7 +12,7 @@
         <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
             <ion-label style="color: #04df04">Top Headlines</ion-label>
                 <ion-select class="background" style="color: #04df04" [(ngModel)]="category" interface="popover">
-                    <ion-option class="background" value="all" (ionSelect)="triggerAll()">US</ion-option>
+                    <ion-option class="background" value="all" (ionSelect)="triggerAll( )">US</ion-option>
                     <ion-option value="business" (ionSelect)="triggerBusiness()">Business</ion-option>
                     <ion-option value="entertainment" (ionSelect)="triggerEntertainment()">Entertainment</ion-option>
                     <ion-option value="health" (ionSelect)="triggerHealth()">Health</ion-option>

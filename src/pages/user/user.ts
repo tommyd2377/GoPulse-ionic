@@ -25,6 +25,7 @@ export class UserPage {
   followerCount: Observable<any[]>;
   followeeCount: Observable<any[]>;
   activity: Observable<any[]>;
+  followers: Observable<any[]>;
 
   fullname: string = this.navParams.get('fullname');
   displayName: string = this.navParams.get('displayName');
@@ -39,7 +40,7 @@ export class UserPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad User: '+(this.uid)+' UserPage');
+    console.log('ionViewDidLoad User: ' + (this.uid) + ' UserPage');
     this.followeeUsername;
     this.displayName;
     this.fullname;
@@ -47,11 +48,11 @@ export class UserPage {
 
     var activity = this.uid+"-activity";
 
-    this.followerCount = this.db.list("user-data/"+(this.uid)+"-followers").valueChanges();
-    this.followeeCount = this.db.list("user-data/"+(this.uid)+"-followees").valueChanges();
+    this.followerCount = this.db.list("user-data/" + (this.uid) + "-followers").valueChanges();
+    this.followeeCount = this.db.list("user-data/" + (this.uid) + "-followees").valueChanges();
     
-    this.activity = this.db.list('user-data/'+activity).valueChanges()
-    .map((array) => array.reverse()) as Observable<any[]>;
+    this.activity = this.db.list('user-data/' + activity).valueChanges()
+      .map((array) => array.reverse()) as Observable<any[]>;
   }
 
   goToFollowers(event, uid) {
@@ -67,23 +68,40 @@ export class UserPage {
   }
 
   follow() {
-    const activity1 = this.db.list("user-data/"+this.uid1+"-activity")
+    const activity1 = this.db.list("user-data/" + this.uid1 + "-activity")
       activity1.push({ followeeUid: (this.uid), followeeUsername: (this.displayName), 
       followeeFullname: (this.fullname), followerUsername: (this.displayName1), followerUid: (this.uid1),
       followingIsTrue: (true) });
     
-    const followees = this.db.list("user-data/"+this.uid1+"-followees")
+    const followees = this.db.list("user-data/" + this.uid1 + "-followees")
       followees.push({ followeeUid: (this.uid), followeeUsername: (this.displayName), 
       followeeFullname: (this.fullname), followerUsername: (this.displayName1), followerUid: (this.uid1),
       followingIsTrue: (true) });
+
+      this.followers = this.db.list('user-data/' + this.uid1 + '-followee-activity').valueChanges()
+      this.followers.subscribe(results => {
+        for (let result of results) {
+          const followerActivity =  this.db.list('user-data/' + result.followerUid + '-followee-activity')
+          followerActivity.push({ followeeUid: (this.uid), followeeUsername: (this.displayName),
+            followerUsername: (this.displayName1), followerUid: (this.uid1), followingIsTrue: (true) });
+        }
+      })
     
-    const follower = this.db.list("user-data/"+this.uid+"-followers")
+    const follower = this.db.list("user-data/" + this.uid + "-followers")
       follower.push({ followeeUid: (this.uid), followeeUsername: (this.displayName), 
       followerUsername: (this.displayName1), followerUid: (this.uid1), followedIsTrue: (true) });
     
-    const activity2= this.db.list("user-data/"+this.uid+"-activity")
+    const activity2= this.db.list("user-data/" + this.uid + "-activity")
       activity2.push({ followeeUid: (this.uid), followeeUsername: (this.displayName),
       followerUsername: (this.displayName1), followerUid: (this.uid1), followedIsTrue: (true) });
-  }
 
+      this.followers = this.db.list('user-data/' + this.uid + '-followee-activity').valueChanges()
+      this.followers.subscribe(results => {
+        for (let result of results) {
+          const followerActivity =  this.db.list('user-data/' + result.followerUid + '-followee-activity')
+          followerActivity.push({ followeeUid: (this.uid), followeeUsername: (this.displayName),
+            followerUsername: (this.displayName1), followerUid: (this.uid1), followedIsTrue: (true) });
+        }
+      })
+  }
 }

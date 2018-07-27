@@ -14,7 +14,6 @@ import * as firebase from 'firebase/app';
 export class UserFolloweesPage {
 
   followees: Observable<any[]>;
-
   uid: string = this.navParams.get('uid');
 
   constructor(public navCtrl: NavController, 
@@ -24,8 +23,8 @@ export class UserFolloweesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FolloweesPage');
-    var uidFollowees = this.uid+"-followees";
-    this.followees = this.afDB.list('user-data/'+uidFollowees).valueChanges();
+    let uidFollowees = this.uid + "-followees";
+    this.followees = this.afDB.list('user-data/' + uidFollowees).valueChanges();
   }
 
   goToProfilePage(event, followee) {
