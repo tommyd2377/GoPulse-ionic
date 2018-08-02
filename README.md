@@ -1,2 +1,2 @@
 # GoPulse-ionic3
-social news platform written in TypeScript using the Ionic framework
+news distribution platform written in TypeScript using the Ionic framework
