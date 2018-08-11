@@ -27,8 +27,10 @@ export class ProfileSettingsPage {
 
   signOut() {
    return this.afAuth.auth.signOut()
-    .then(() => console.log("success"))
-    .catch(error => console.log(error));
+    .then(() => 
+      console.log("success"))
+    .catch(error => 
+      console.log(error));
   }
 
 

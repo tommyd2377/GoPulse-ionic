@@ -73,12 +73,7 @@ export class ArticleDetailPage {
     this.cMCount = this.db.list("article-data/"+this.titleID+"-cm").valueChanges()
     this.dSCount = this.db.list("article-data/"+this.titleID+"-ds").valueChanges()
     //this.commentCount = this.db.list("article-data/"+this.titleID+"-comments").valueChanges()
-
-    
-  
   }
-
-
 
   twoThumbsUp() {
 
@@ -104,7 +99,7 @@ export class ArticleDetailPage {
 
   changedMind() {
     
-    const articleVotes = this.db.list("article-data/"+(this.titleID)+"-cm")
+    const articleVotes = this.db.list("article-data/"+(this.titleID)+"-cm");
       articleVotes.push({ uid: (this.uid), username: (this.displayName),
       url: (this.url), description: (this.description), source: (this.source),
       title: (this.title), urlToImage: (this.image), changedMindIsTrue: (true) });

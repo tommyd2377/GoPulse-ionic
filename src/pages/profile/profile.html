@@ -39,7 +39,7 @@
         (click)="goToDetailPage($event, active)" class="background" text-wrap padding-bottom>
         
       <h2 style="color: #04df04" *ngIf="active.twoThumbsUpIsTrue" padding-bottom>You shared an article</h2>
-      <h2 style="color: #04df04" *ngIf="active.changedMindIsTrue" padding-bottom>You shared an article that changed your perspective</h2>
+      <h2 style="color: #04df04" *ngIf="active.changedMindIsTrue" padding-bottom>You shared an article that expanded your perspective</h2>
       <img *ngIf="active.twoThumbsUpIsTrue" [src]="active.urlToImage">
       <img *ngIf="active.changedMindIsTrue" [src]="active.urlToImage">
 

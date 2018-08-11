@@ -17,14 +17,12 @@
 
 </ion-header>
 
-
-
 <ion-content class="background">
     <div style="max-width: 600px; margin-right: auto; margin-left: auto">
 
   <div style="max-width: 600px; margin-right: auto; margin-left: auto" class="background" [ngSwitch]="searchType">
     <div *ngIf="searchingUsers">
-      <ion-searchbar *ngSwitchCase="'userSearch'" type="text" (ionInput)="searchUsers($event)" placeholder="search users..." class="input"></ion-searchbar>
+      <ion-searchbar *ngSwitchCase="'userSearch'" type="search" (ionInput)="searchUsers($event)" placeholder="search users..." class="input"></ion-searchbar>
         <ion-list class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
           <ion-item  *ngFor="let user of userResults" (click)="goToUserProfile($event, user)" class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
             <ion-avatar item-start>
@@ -41,7 +39,7 @@
     </div>
           
     <div *ngIf="searchingPublishers">
-      <ion-searchbar *ngSwitchCase="'publisherSearch'" type="text" (ionInput)="searchPublishers($event)" placeholder="search publishers..." class="input"></ion-searchbar>
+      <ion-searchbar *ngSwitchCase="'publisherSearch'" type="search" (ionInput)="searchPublishers($event)" placeholder="search publishers..." class="input"></ion-searchbar>
       <ion-list class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
           <ion-item class="background" *ngFor="let publisher of publisherResults" style="max-width: 600px; margin-right: auto; margin-left: auto" (click)="publisherPage($event, publisher)">
             <ion-thumbnail item-start>
