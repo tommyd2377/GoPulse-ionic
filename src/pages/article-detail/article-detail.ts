@@ -14,7 +14,6 @@ import * as firebase from 'firebase/app';
 export class ArticleDetailPage {
 
   options: ThemeableBrowserOptions;
-
   activity: Observable<any[]>;
   articleVotes: Observable<any[]>;
   articleCM: Observable<any[]>;
