@@ -8,7 +8,12 @@
 
 <ion-content padding class="background">
   <div style="max-width: 600px; margin-right: auto; margin-left: auto">
-  <br>
+  <p padding-top style="color: white">
+    After a two month free trial for first time subscribers, the service will cost $4.99 a month. 
+    This is to ensure the platform can remain independent without ad revenue.
+    No one likes paywalls, but for a few dollars each month GoPulse can make a comitment to it's users that other 
+    digital services cannot: With GoPulse, the platform is the product and you are the customer.
+  </p>
   <form [formGroup]="userForm" class="background" (ngSubmit)="createUser()">
     <ion-item class="background">
     <ion-label for='email' style="color: white" floating>Email</ion-label>
@@ -26,6 +31,14 @@
     <ion-label  style="color: white" for="password" floating>Password</ion-label>
     <ion-input  style="color: white" type="password" [(ngModel)]="password" formControlName="password" required></ion-input>
     </ion-item>
+    <ion-item class="background">
+        <ion-label  style="color: white" floating>Card Number</ion-label>
+        <ion-input  style="color: white" type="password" ></ion-input>
+        </ion-item>
+        <ion-item class="background">
+            <ion-label  style="color: white" floating>Experation Date</ion-label>
+            <ion-input  style="color: white" type="password"></ion-input>
+            </ion-item>
     <br>
     <div style="color: red" *ngIf="formErrors.email">
         {{ formErrors.email }}
@@ -35,7 +48,7 @@
       </div>
       <br>
       <br>
-    <button class="button" ion-button type="submit" block [disabled]="!userForm.valid">Sign Up</button>    
+    <button class="button" ion-button type="submit" block [disabled]="!userForm.valid">Start your free trial</button>    
   </form>
 </div>
 </ion-content>

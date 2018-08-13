@@ -107,10 +107,6 @@ export class SignupPage {
   };
 }
 
-//In order for the platform to remain independent without ad revenue the service will cost $4.99 a month.
-//No one likes paywalls, but for a few dollars each month GoPulse can make a comitment to it's users that other 
-//digital services cannot: With GoPulse, the platform is the product and you are our customer.
-
 
 
 
