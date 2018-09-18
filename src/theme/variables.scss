@@ -6,19 +6,18 @@ $app-direction: ltr;
 
 $colors: (
   primary:    #ffffff,
-  secondary:  #04df04,
+  secondary:  #2AB759,
   danger:     #f53d3d,
   light:      #ffffff,
-  dark:       rgb(0, 0, 0)
+  dark:       #1b1b1b
 );
 
 $toolbar-background: color($colors, secondary);
-$toolbar-text-color: color($colors, dark);
 
 $tabs-background: color($colors, secondary);
-$tabs-tab-color-active: color($colors, light);
+$tabs-tab-color-inactive: color($colors, light);
+$tabs-tab-color-active: color($colors, dark);
 $tabs-tab-color: color($colors, dark);
-$tabs-tab-color-inactive: color($colors, dark);
 
 @import "ionic.theme.default";
 @import "ionic.ionicons";

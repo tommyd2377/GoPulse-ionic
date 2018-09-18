@@ -10,8 +10,8 @@
   
     <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
         <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
-            <ion-label style="color: #04df04">Top Headlines</ion-label>
-                <ion-select class="background" style="color: #04df04" [(ngModel)]="category" interface="popover">
+            <ion-label style="color: #2AB759">Top Headlines</ion-label>
+                <ion-select class="background" style="color: #2AB759" [(ngModel)]="category" interface="popover">
                     <ion-option class="background" value="all" (ionSelect)="triggerAll( )">US</ion-option>
                     <ion-option value="business" (ionSelect)="triggerBusiness()">Business</ion-option>
                     <ion-option value="entertainment" (ionSelect)="triggerEntertainment()">Entertainment</ion-option>
@@ -31,7 +31,7 @@
                         <img [src]="businessResult?.urlToImage">
                     </div>
                 <h1 style="color: white" padding-top>{{ businessResult?.title }}</h1>
-                <h3 style="color: #04df04" padding-top padding-bottom>{{ businessResult?.source.name }}</h3>
+                <h3 style="color: #2AB759" padding-top padding-bottom>{{ businessResult?.source.name }}</h3>
             </ion-item>
         </ion-list>
     </div>
@@ -44,7 +44,7 @@
                         <img [src]="allResult?.urlToImage">
                     </div>
                 <h1 style="color: white" padding-top>{{ allResult?.title }}</h1>
-                <h3 style="color: #04df04" padding-top padding-bottom>{{ allResult?.source.name }}</h3>
+                <h3 style="color: #2AB759" padding-top padding-bottom>{{ allResult?.source.name }}</h3>
             </ion-item>
         </ion-list>
     </div>
@@ -57,7 +57,7 @@
                         <img [src]="healthResult?.urlToImage">
                     </div>
                 <h1 style="color: white" padding-top>{{ healthResult?.title }}</h1>
-                <h3 style="color: #04df04" padding-top padding-bottom>{{ healthResult?.source.name }}</h3>
+                <h3 style="color: #2AB759" padding-top padding-bottom>{{ healthResult?.source.name }}</h3>
             </ion-item>
         </ion-list>
     </div>
@@ -70,7 +70,7 @@
                         <img [src]="sportsResult?.urlToImage">
                     </div>
                 <h1 style="color: white" padding-top>{{ sportsResult?.title }}</h1>
-                <h3 style="color: #04df04" padding-top padding-bottom>{{ sportsResult?.source.name }}</h3>
+                <h3 style="color: #2AB759" padding-top padding-bottom>{{ sportsResult?.source.name }}</h3>
             </ion-item>
         </ion-list>
     </div>
@@ -83,7 +83,7 @@
                         <img [src]="technologyResult?.urlToImage">
                     </div>
                 <h1 style="color: white" padding-top>{{ technologyResult?.title }}</h1>
-                <h3 style="color: #04df04" padding-top padding-bottom>{{ technologyResult?.source.name }}</h3>
+                <h3 style="color: #2AB759" padding-top padding-bottom>{{ technologyResult?.source.name }}</h3>
             </ion-item>
         </ion-list>
     </div>
@@ -96,7 +96,7 @@
                         <img [src]="entertainmentResult?.urlToImage">
                     </div>
                 <h1 style="color: white" padding-top>{{ entertainmentResult?.title }}</h1>
-                <h3 style="color: #04df04" padding-top padding-bottom>{{ entertainmentResult?.source.name }}</h3>
+                <h3 style="color: #2AB759" padding-top padding-bottom>{{ entertainmentResult?.source.name }}</h3>
             </ion-item>
         </ion-list>
     </div>
@@ -109,7 +109,7 @@
                         <img [src]="scienceResult?.urlToImage">
                     </div>                     
                 <h1 style="color: white" padding-top>{{ scienceResult?.title }}</h1>
-                <h3 style="color: #04df04" padding-top padding-bottom>{{ scienceResult?.source.name }}</h3>
+                <h3 style="color: #2AB759" padding-top padding-bottom>{{ scienceResult?.source.name }}</h3>
             </ion-item>
         </ion-list>
     </div>

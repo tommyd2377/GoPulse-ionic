@@ -1,22 +1,21 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { ThemeableBrowser, ThemeableBrowserOptions, ThemeableBrowserObject } from '@ionic-native/themeable-browser';
+import { ThemeableBrowser } from '@ionic-native/themeable-browser';
 import { MyApp } from './app.component';
+
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { PulsePage } from '../pages/pulse/pulse';
-
 import { AuthProvider } from '../providers/auth/auth';
 import { SearchProvider } from '../providers/search-model/search-model';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { HttpModule } from '@angular/http';
+
 import { ArticleDetailPageModule } from '../pages/article-detail/article-detail.module';
 import { ProfilePageModule } from '../pages/profile/profile.module';
 import { PublisherPageModule } from '../pages/publisher/publisher.module';
@@ -32,7 +31,7 @@ import { UserFollowersPageModule } from '../pages/user-followers/user-followers.
 import { UserFolloweesPageModule } from '../pages/user-followees/user-followees.module';
 import { publisherLists } from '../publisher-list';
 
- //News API key = f479cb7134e548bca82908661da32403
+//News API key = f479cb7134e548bca82908661da32403
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
@@ -70,7 +69,7 @@ export const firebaseConfig = {
     FolloweesPageModule,
     SearchPageModule,
     UserFollowersPageModule,
-    UserFolloweesPageModule,
+    UserFolloweesPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

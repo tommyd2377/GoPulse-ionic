@@ -11,8 +11,8 @@
     <div padding-top style="max-width: 600px; margin-right: auto; margin-left: auto">
       <h1 padding-top style="color: white">Welcome to GoPulse</h1>
       
-      <p padding-top style="color: white">GoPulse is a social news platform that was built from the ground up
-        to be ad free and to prevent filter bubbles. The platform only indexes articles from
+      <p padding-top style="color: white">GoPulse is a social news platform built to be ad
+        free and to prevent filter bubbles. The platform only indexes articles from
         publishers that have been carefully vetted. With GoPulse you can:
       </p>
       
@@ -23,11 +23,12 @@
       </ul>
     
       <p padding-top style="color: white">New to GoPulse?</p>
-        <button class="button" (click)="signUp()" ion-button block>Sign Up</button>
+        <button ion-button block icon-start color="secondary" outline (click)="signUp()">Sign Up</button>
     
       <p style="color: white">Already a have an account?</p>
-        <button class="button" (click)="login()" ion-button block>Login</button>
+        <button ion-button block icon-start color="secondary" outline (click)="login()">Login</button>
     
     </div>
 
   </ion-content>
+-

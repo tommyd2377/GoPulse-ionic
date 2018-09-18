@@ -3,5 +3,17 @@
 }
 
 .button {
-    background: color($colors, secondary)
+    background: color($colors, dark)
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.white-text {
+    color: white; 
+    max-width: 600px;
+    margin-right: auto; 
+    margin-left: auto
 }

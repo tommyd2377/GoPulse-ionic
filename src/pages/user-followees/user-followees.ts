@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UserPage } from '../user/user';
-import * as firebase from 'firebase/app';
 
 @IonicPage()
 @Component({
@@ -14,6 +13,7 @@ import * as firebase from 'firebase/app';
 export class UserFolloweesPage {
 
   followees: Observable<any[]>;
+  uidFollowees;
   uid: string = this.navParams.get('uid');
 
   constructor(public navCtrl: NavController, 
@@ -23,12 +23,12 @@ export class UserFolloweesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FolloweesPage');
-    let uidFollowees = this.uid + "-followees";
-    this.followees = this.afDB.list('user-data/' + uidFollowees).valueChanges();
+    this.uidFollowees = this.uid + "-followees";
+    this.followees = this.afDB.list('user-data/' + this.uidFollowees).valueChanges();
   }
 
   goToProfilePage(event, followee) {
-    this.navCtrl.push(UserPage, followee)
+    this.navCtrl.push(UserPage, followee);
   }
 
 }

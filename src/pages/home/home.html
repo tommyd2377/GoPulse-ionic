@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     
-    <ion-title>Home</ion-title>
+    <ion-title color="dark">Home</ion-title>
   
   </ion-navbar>
 </ion-header>
@@ -12,18 +12,26 @@
     <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto">
       <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" *ngFor="let active of activity | async" 
         (click)="goToDetailPage($event, active)" class="background" text-wrap padding-bottom>
+       
+        <ion-item class="background">
+            <ion-avatar item-start>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL">
+              </ion-avatar>
+              <h2 style="color: #2AB759" *ngIf="active.twoThumbsUpIsTrue" text-wrap padding-bottom>{{ active.username }}<span style="color: white"> shared this</span></h2>
+              <h2 style="color: #2AB759" *ngIf="active.changedMindIsTrue" text-wrap padding-bottom>{{ active.username }}<span style="color: white"> found this article that expanded their perspective</span></h2>
+          </ion-item>
+              
           
-          <h2 style="color: #04df04" *ngIf="active.twoThumbsUpIsTrue" text-wrap padding-bottom>{{ active.username }} <span style="color: white">shared an article</span></h2>
-          <h2 style="color: #04df04" *ngIf="active.changedMindIsTrue" text-wrap padding-bottom>{{ active.username }} <span style="color: white">shared an article that expanded their perspective</span></h2>
+        
           
-          <img *ngIf="active.twoThumbsUpIsTrue" [src]="active.urlToImage">
+        <img *ngIf="active.twoThumbsUpIsTrue" [src]="active.urlToImage">
           <img *ngIf="active.changedMindIsTrue" [src]="active.urlToImage">
           
           <h1 style="color: white" *ngIf="active.twoThumbsUpIsTrue" padding-top text-wrap>{{ active.title }}</h1>
           <h1 style="color: white" *ngIf="active.changedMindIsTrue" padding-top text-wrap>{{ active.title }}</h1>
           
-          <h3 style="color: #04df04" *ngIf="active.twoThumbsUpIsTrue" padding-top padding-bottom text-wrap>{{ active.source.name }}</h3>
-          <h3 style="color: #04df04" *ngIf="active.changedMindIsTrue" padding-top padding-bottom text-wrap>{{ active.source.name }}</h3>
+          <h3 style="color: #2AB759" *ngIf="active.twoThumbsUpIsTrue" padding-top padding-bottom text-wrap>{{ active.source.name }}</h3>
+          <h3 style="color: #2AB759" *ngIf="active.changedMindIsTrue" padding-top padding-bottom text-wrap>{{ active.source.name }}</h3>
       
       </ion-item>
     </ion-list>

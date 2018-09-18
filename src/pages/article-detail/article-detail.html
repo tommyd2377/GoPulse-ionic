@@ -12,34 +12,38 @@
     
     <img src="{{ image }}"/>
 
-    <ion-row padding>
-      <ion-col>
-          <button ion-button (click)="openWebpage()">
-            <ion-icon name="open"></ion-icon>
-          </button>
-        </ion-col>
-    <ion-col>
-      <button click ion-button icon-left (click)="twoThumbsUp()">
+    <div class="container">
+
+      <button ion-button icon-start color="secondary" clear (click)="openWebpage()">
+        <ion-icon name="open"></ion-icon>
+        0
+      </button>
+   
+      <button ion-button icon-start color="secondary" clear (click)="twoThumbsUp()">
         <ion-icon name="share-alt"></ion-icon>
-        <div>{{ (voteCount | async)?.length }}</div>
+        {{ (voteCount | async)?.length }}
       </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-left (click)="changedMind()">
+
+      <button ion-button icon-start color="secondary" clear (click)="changedMind()">
         <ion-icon name="swap"></ion-icon>
-        <div>{{ (cMCount | async)?.length }}</div>
+        {{ (cMCount | async)?.length }}
       </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-left (click)="directSend()">
+
+      <button ion-button icon-start color="secondary" clear (click)="directSend()">
         <ion-icon name="send"></ion-icon>
+        0
       </button>
-    </ion-col>
-  </ion-row>
+
+      <button ion-button icon-start color="secondary" clear (click)="directSend()">
+        <ion-icon name="bookmark"></ion-icon>
+        0
+      </button>
+
+    </div>
 </div>
 
-    <h2 style="color: white" padding>{{ title }}</h2>
-    <p style="color: white" padding>{{ description }}</p>
+    <h2 class="white-text" padding>{{ title }}</h2>
+    <p class="white-text" padding>{{ description }}</p>
   
 
 </ion-content>

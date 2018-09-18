@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { ArticleDetailPage } from '../article-detail/article-detail';
@@ -30,23 +29,22 @@ export class ProfilePage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private afAuth: AngularFireAuth,
               private db: AngularFireDatabase) {
   }
 
   ionViewDidLoad() {
         
-    console.log('ionViewDidLoad User: '+(this.uid)+' ProfilePage');
+    console.log('ionViewDidLoad User: ' + (this.uid) + ' ProfilePage');
         
     var activity = this.uid+"-activity";
 
-    this.followerCount = this.db.list("user-data/"+(this.uid)+"-followers").valueChanges();
-    this.followeeCount = this.db.list("user-data/"+(this.uid)+"-followees").valueChanges();
+    this.followerCount = this.db.list("user-data/" + (this.uid) + "-followers").valueChanges();
+    this.followeeCount = this.db.list("user-data/" + (this.uid) + "-followees").valueChanges();
         
-    this.activity = this.db.list('user-data/'+activity).valueChanges()
+    this.activity = this.db.list('user-data/' + activity).valueChanges()
       .map((array) => array.reverse()) as Observable<any[]>;
 
-    this.userData = this.db.object('user-data/'+this.uid).valueChanges()
+    this.userData = this.db.object('user-data/' + this.uid).valueChanges();
   
   }
 

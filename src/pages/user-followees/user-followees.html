@@ -6,14 +6,12 @@
 
 </ion-header>
 
-<ion-content padding>
-  <ion-grid fixed>
-    <ion-list>
-      <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" *ngFor="let followee of followees | async" 
-        (click)="goToProfilePage($event, followee)" class="background" text-wrap padding-bottom>
-          <h1>{{ followee?.followeeUsername }}</h1>
-      </ion-item>
-    </ion-list>
-  </ion-grid>
-
-</ion-content>
+<ion-list class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
+    <ion-item  *ngFor="let followee of followees | async" (click)="goToProfilePage($event, followee)" class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
+      <ion-avatar item-start>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL">
+      </ion-avatar>
+      <h2 style="color: #2AB759">{{ followee?.followeeUsername }}</h2>
+      <p style="color: #2AB759">{{ followee?.followeeFullname }}</p>
+    </ion-item>
+  </ion-list>
