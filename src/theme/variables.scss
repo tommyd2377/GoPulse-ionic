@@ -13,6 +13,10 @@ $colors: (
 );
 
 $toolbar-background: color($colors, secondary);
+$toolbar-md-title-text-color: color($colors, dark);
+$toolbar-ios-title-text-color: color($colors, dark);
+$toolbar-ios-button-color: color($colors, dark);
+$toolbar-md-button-color: color($colors, dark);
 
 $tabs-background: color($colors, secondary);
 $tabs-tab-color-inactive: color($colors, light);
