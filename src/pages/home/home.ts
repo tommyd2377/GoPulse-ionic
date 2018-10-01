@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
 import { ArticleDetailPage } from '../article-detail/article-detail';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -17,6 +17,8 @@ export class HomePage {
   uid = this.user.uid;
 
   activity: Observable<any[]>;
+
+  @ViewChild(Content) content: Content;
   
   constructor(public navCtrl: NavController,
               private afDB: AngularFireDatabase,
@@ -30,6 +32,10 @@ export class HomePage {
         
     this.activity = this.afDB.list('user-data/' + followeeActivity).valueChanges()
       .map((array) => array.reverse()) as Observable<any[]>;
+  }
+
+  ionSelected() {
+    this.content.scrollToTop();
   }
 
   goToDetailPage(event, active) {

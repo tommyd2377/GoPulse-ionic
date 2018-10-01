@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { SearchProvider } from '../../providers/search-model/search-model';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { UserPage } from '../user/user';
@@ -20,6 +20,8 @@ export class SearchPage {
   publisherResults;
   startAt: BehaviorSubject<string|null> = new BehaviorSubject("");
   endAt: BehaviorSubject<string|null> = new BehaviorSubject("\uf8ff");
+
+  @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -47,6 +49,10 @@ export class SearchPage {
     let q = $event.target.value
     this.startAt.next(q)
     this.endAt.next(q+"\uf8ff")
+  }
+
+  ionSelected() {
+    this.content.scrollToTop();
   }
 
   goToUserProfile(event, user) {

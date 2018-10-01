@@ -38,10 +38,12 @@ export class SignupPage {
                       Validators.email
                     ]
                   ],
+                  
+                
                   'password': ['', [
                     Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-                    Validators.minLength(6),
-                    Validators.maxLength(25)
+                    Validators.minLength(8),
+                    Validators.maxLength(40)
                   ]
                 ],
                 });
@@ -61,7 +63,7 @@ export class SignupPage {
         user.sendEmailVerification();
         user.updateProfile({
           displayName: (this.displayName),
-          photoURL: 'some/url',
+          photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL',
         })
       let uid = user.uid;
       const userData = this.db.object('user-data/' + uid);
@@ -101,7 +103,7 @@ export class SignupPage {
     'password': {
       'required':      'Password is required.',
       'pattern':       'Password must be include one letter and one number.',
-      'minlength':     'Password must be at least 6 characters long.',
+      'minlength':     'Password must be at least 8 characters long.',
       'maxlength':     'Password cannot be more than 40 characters long.',
     }
   };

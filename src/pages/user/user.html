@@ -16,7 +16,10 @@
       
       <h2 *ngIf="displayName" style="color: white">{{ displayName }}</h2>
       <h2 *ngIf="followeeUsername" style="color: white">{{ followeeUsername }}</h2>
+      <h2 *ngIf="followeeUsername" style="color: white">{{ followerUsername }}</h2>
       <p style="color: white">{{ fullname }}</p>
+      <p style="color: white">{{ followeeFullname }}</p>
+      <p style="color: white">{{ followerFullname }}</p>
     
     <button ion-button color="secondary" outline icon-left (click)="follow()">
       <ion-icon name="person-add"></ion-icon>

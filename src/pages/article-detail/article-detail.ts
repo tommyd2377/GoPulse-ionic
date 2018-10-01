@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ThemeableBrowser, 
-  ThemeableBrowserOptions, 
-  ThemeableBrowserObject } from '@ionic-native/themeable-browser';
+import { ThemeableBrowser, ThemeableBrowserOptions, ThemeableBrowserObject } from '@ionic-native/themeable-browser';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
@@ -36,6 +34,10 @@ export class ArticleDetailPage {
   followers: Observable<any[]>;
   followees: Observable<any[]>;
   results = [];
+  userHasLiked = false;
+  hasLiked;
+  userHasCM = true;
+  userHasBookmarked = false;
 
   user = firebase.auth().currentUser;
   uid = this.user.uid; 
@@ -71,6 +73,13 @@ export class ArticleDetailPage {
     this.followers = this.db.list("user-data/" + this.uid + "-followers").valueChanges();
 
     this.voteCount = this.db.list("article-data/" + this.titleID  + "-votes").valueChanges();
+    this.hasLiked = this.db.object("article-data/" + this.titleID  + "-votes/" + this.uid).valueChanges();
+    console.log(this.hasLiked)
+      this.voteCount.subscribe(results => {
+        for (let result of results) {
+
+        }
+      })
     this.cMCount = this.db.list("article-data/" + this.titleID + "-cm").valueChanges();
     this.dSCount = this.db.list("article-data/" + this.titleID + "-ds").valueChanges();
     //this.commentCount = this.db.list("article-data/"+this.titleID+"-comments").valueChanges()

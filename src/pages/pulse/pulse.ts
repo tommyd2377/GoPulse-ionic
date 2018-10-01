@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Content } from 'ionic-angular';
 import { ArticleDetailPage } from '../article-detail/article-detail';
 import { publisherLists } from '../../publisher-list';
 import { Http } from '@angular/http';
@@ -34,6 +34,8 @@ export class PulsePage {
   triggerSportsArticles: boolean;
   apiKey: string = "f479cb7134e548bca82908661da32403";
   category: string = "all";
+
+  @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController,
               private http: Http,
@@ -166,6 +168,10 @@ export class PulsePage {
                         console.log(this.sportsResults)
             }
   )}
+
+  ionSelected() {
+    this.content.scrollToTop();
+  }
 
   businessArticlePage(event, businessResult) {
     this.navCtrl.push(ArticleDetailPage, businessResult)

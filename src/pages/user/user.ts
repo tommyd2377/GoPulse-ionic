@@ -48,13 +48,27 @@ export class UserPage {
     this.fullname;
     this.uid;
 
-    const activity = this.uid + "-activity";
-
-    this.followerCount = this.db.list("user-data/" + (this.uid) + "-followers").valueChanges();
-    this.followeeCount = this.db.list("user-data/" + (this.uid) + "-followees").valueChanges();
-    
-    this.activity = this.db.list('user-data/' + activity).valueChanges()
-      .map((array) => array.reverse()) as Observable<any[]>;
+    if (this.uid) {
+      const activity = this.uid + "-activity";
+        this.activity = this.db.list('user-data/' + activity).valueChanges()
+          .map((array) => array.reverse()) as Observable<any[]>;
+             this.followerCount = this.db.list("user-data/" + (this.uid) + "-followers").valueChanges();
+             this.followeeCount = this.db.list("user-data/" + (this.uid) + "-followees").valueChanges();
+    }
+    else if (this.followeeUid) {
+      const activity = this.followeeUid + "-activity";
+        this.activity = this.db.list('user-data/' + activity).valueChanges()
+          .map((array) => array.reverse()) as Observable<any[]>;
+             this.followerCount = this.db.list("user-data/" + (this.followeeUid) + "-followers").valueChanges();
+             this.followeeCount = this.db.list("user-data/" + (this.followeeUid) + "-followees").valueChanges();
+    }
+    else if (this.followerUid) {
+      const activity = this.followerUid + "-activity";
+        this.activity = this.db.list('user-data/' + activity).valueChanges()
+          .map((array) => array.reverse()) as Observable<any[]>;
+             this.followerCount = this.db.list("user-data/" + (this.followerUid) + "-followers").valueChanges();
+             this.followeeCount = this.db.list("user-data/" + (this.followerUid) + "-followees").valueChanges();
+    }
   }
 
   goToFollowers(event, uid) {

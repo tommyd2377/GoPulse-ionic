@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { ArticleDetailPage } from '../article-detail/article-detail';
@@ -27,6 +27,8 @@ export class ProfilePage {
   name: string;
   fullName: string;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private db: AngularFireDatabase) {
@@ -46,6 +48,10 @@ export class ProfilePage {
 
     this.userData = this.db.object('user-data/' + this.uid).valueChanges();
   
+  }
+
+  ionSelected() {
+    this.content.scrollToTop();
   }
 
   goToFollowers() {
