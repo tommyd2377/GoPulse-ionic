@@ -28,7 +28,6 @@ export class SignupPage {
                 this.afAuth.authState.subscribe( (user) => {
                   if (user) {
                     this.navCtrl.setRoot(TabsPage,{})
-                    console.log("User: "+(user.uid)+" routed from signup")
                   }
                 })
 
@@ -50,10 +49,6 @@ export class SignupPage {
                 this.userForm.valueChanges.subscribe(data => 
                   this.onValueChanged(data));
                   this.onValueChanged();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage')
   }
 
   createUser() {

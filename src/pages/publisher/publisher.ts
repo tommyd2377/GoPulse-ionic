@@ -42,7 +42,6 @@ export class PublisherPage {
     this.name;
     this.description;
     this.image;
-    this.getAllArticles();
     this.getTopArticles();
   }
 
@@ -60,6 +59,7 @@ export class PublisherPage {
   }
 
   showAll() {
+    this.getAllArticles();
     this.toggleTop = false;
     this.toggleAll = true;
   }

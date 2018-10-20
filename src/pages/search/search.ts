@@ -31,7 +31,6 @@ export class SearchPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserSearchPage');
     this.search.getUsers(this.startAt, this.endAt)
       .subscribe(userResults => this.userResults = userResults)
 

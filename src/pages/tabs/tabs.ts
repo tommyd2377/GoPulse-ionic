@@ -23,7 +23,7 @@ export class TabsPage {
                 //try getting rid of this
                 this.afAuth.authState.subscribe(user => {
                   if (user) {
-                    console.log("User "+(user.uid)+" here somewhere")
+                    
                   }
                   else {
                     this.navCtrl.setRoot(WelcomePage,{})

@@ -20,20 +20,15 @@ export class LoginPage {
     this.afAuth.authState.subscribe( (user) => {
       if (user) {
         this.navCtrl.setRoot(TabsPage,{})
-        console.log("User: "+(user.uid)+" routed from login")
       }
     })
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage')
   }
 
   userLogin() {
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
     this.afAuth.authState.subscribe( (user) => {
       if (user) {
-        console.log("User: "+(user.uid)+" login")
+
       }
     })
     this.navCtrl.push(TabsPage)

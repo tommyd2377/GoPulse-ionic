@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { ArticleDetailPage } from '../article-detail/article-detail';
 import { UserFollowersPage } from '../user-followers/user-followers';
 import { UserFolloweesPage } from '../user-followees/user-followees';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 import * as firebase from 'firebase/app';
 
 @IonicPage()
@@ -18,7 +20,8 @@ export class UserPage {
   currentUser = firebase.auth().currentUser;
   currentUserDisplayName = this.currentUser.displayName;
   currentUserUid = this.currentUser.uid;
-
+  currentUserFullname;
+  
   followerCount: Observable<any[]>;
   followeeCount: Observable<any[]>;
   activity: Observable<any[]>;
@@ -38,11 +41,21 @@ export class UserPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private db: AngularFireDatabase) { 
+              private db: AngularFireDatabase,
+              private auth: AngularFireAuth) { 
+                
+
+                  const ffullname = this.db.object("user-data/" + this.currentUserUid + "/fullname").valueChanges();
+                  console.log(ffullname)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserPage. User: ' + (this.uid));
+    
+    this.followerUid;
+    this.followerFullname;
+    this.followerUsername;
+    this.followeeUid;
+    this.followeeFullname;
     this.followeeUsername;
     this.displayName;
     this.fullname;
@@ -94,7 +107,7 @@ export class UserPage {
       followeeFullname: (this.fullname), followerUsername: (this.currentUserDisplayName), followerUid: (this.currentUserUid),
       followingIsTrue: (true) });
 
-      this.followers = this.db.list('user-data/' + this.currentUserUid + '-followee-activity').valueChanges();
+      this.followers = this.db.list('user-data/' + this.currentUserUid + '-followers').valueChanges();
       this.followers.subscribe(results => {
         for (let result of results) {
           const followerActivity =  this.db.list('user-data/' + result.followerUid + '-followee-activity');
@@ -107,17 +120,17 @@ export class UserPage {
       follower.push({ followeeUid: (this.uid), followeeUsername: (this.displayName), 
       followerUsername: (this.currentUserDisplayName), followerUid: (this.currentUserUid), followedIsTrue: (true) });
     
-    const activity2= this.db.list("user-data/" + this.uid + "-activity");
+    const activity2 = this.db.list("user-data/" + this.uid + "-activity");
       activity2.push({ followeeUid: (this.uid), followeeUsername: (this.displayName),
       followerUsername: (this.currentUserDisplayName), followerUid: (this.currentUserUid), followedIsTrue: (true) });
 
-      this.followers = this.db.list('user-data/' + this.uid + '-followee-activity').valueChanges();
+      this.followers = this.db.list('user-data/' + this.uid + '-followers').valueChanges();
       this.followers.subscribe(results => {
         for (let result of results) {
-          const followerActivity =  this.db.list('user-data/' + result.followerUid + '-followee-activity');
+          const followerActivity = this.db.list('user-data/' + result.followerUid + '-followee-activity');
           followerActivity.push({ followeeUid: (this.uid), followeeUsername: (this.displayName),
             followerUsername: (this.currentUserDisplayName), followerUid: (this.currentUserUid), followedIsTrue: (true) });
         }
       })
-  }
+  }x
 }

@@ -57,7 +57,6 @@ export class PulsePage {
               this.triggerSportsArticles = false;
               this.triggerEntertainmentArticles = false;
               this.triggerScienceArticles = false;
-              console.log(this.allResults)
             }
   )}
 
@@ -75,7 +74,6 @@ export class PulsePage {
                 this.triggerSportsArticles = false;
                 this.triggerEntertainmentArticles = false;
                 this.triggerScienceArticles = false;
-                console.log(this.businessResults)
               }
   )}
 
@@ -93,7 +91,6 @@ export class PulsePage {
               this.triggerSportsArticles = false;
               this.triggerEntertainmentArticles = false;
               this.triggerScienceArticles = false;
-                        console.log(this.healthResults)
             }
   )}
 
@@ -111,7 +108,6 @@ export class PulsePage {
               this.triggerSportsArticles = false;
               this.triggerEntertainmentArticles = false;
               this.triggerScienceArticles = false;
-                        console.log(this.technologyResults)
             }
   )}
 
@@ -129,7 +125,6 @@ export class PulsePage {
               this.triggerSportsArticles = false;
               this.triggerEntertainmentArticles = false;
               this.triggerScienceArticles = true;
-                        console.log(this.scienceResults)
             }
   )}
 
@@ -147,7 +142,6 @@ export class PulsePage {
               this.triggerSportsArticles = false;
               this.triggerEntertainmentArticles = true;
               this.triggerScienceArticles = false;
-                        console.log(this.entertainmentResults)
             }
   )}
 
@@ -165,7 +159,6 @@ export class PulsePage {
               this.triggerSportsArticles = true;
               this.triggerEntertainmentArticles = false;
               this.triggerScienceArticles = false;
-                        console.log(this.sportsResults)
             }
   )}
 

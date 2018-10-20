@@ -27,7 +27,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage User: '+(this.uid))
+   
     let followeeActivity = this.uid + "-followee-activity";
         
     this.activity = this.afDB.list('user-data/' + followeeActivity).valueChanges()

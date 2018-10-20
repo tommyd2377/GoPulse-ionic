@@ -16,9 +16,20 @@ export class ArticleDetailPage {
   options: ThemeableBrowserOptions;
   activity: Observable<any[]>;
   articleVotes: Observable<any[]>;
+  articleReads: Observable<any[]>;
   articleCM: Observable<any[]>;
   voteCount: Observable<any[]>;
+  voteActivity: Observable<any[]>;
+  voteActivityFollowers: Observable<any[]>;
+  voteActivityFollower: Observable<any[]>;
+  voteActivityFollowerKey: Observable<any[]>;
+  voteFollowerActivityRef: Observable<any[]>;
+  userVoteKey: Observable<any[]>;
+  userVoteActivityKey: Observable<any[]>;
+  voteKey: string;
+  voteActivityKey: string;
   cMCount: Observable<any[]>;
+  readCount: Observable<any[]>;
   commentCount: Observable<any[]>;
   dSCount: Observable<any[]>;
   articleComments: Observable<any[]>;
@@ -34,11 +45,9 @@ export class ArticleDetailPage {
   followers: Observable<any[]>;
   followees: Observable<any[]>;
   results = [];
-  userHasLiked = false;
-  hasLiked;
-  userHasCM = true;
-  userHasBookmarked = false;
-
+  hasLiked: boolean;
+  hasCM: boolean;
+  voteFollowerKeys = [];
   user = firebase.auth().currentUser;
   uid = this.user.uid; 
   displayName = this.user.displayName;
@@ -48,12 +57,15 @@ export class ArticleDetailPage {
   image: string = this.navParams.get('urlToImage');
   url: string = this.navParams.get('url');
   source = this.navParams.get('source');
+  content = this.navParams.get('content');
   titleID: string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private themeableBrowser: ThemeableBrowser,
-              private db: AngularFireDatabase) { }
+              private db: AngularFireDatabase) {
+                
+               }
               
   ionViewDidLoad() {
     
@@ -62,27 +74,56 @@ export class ArticleDetailPage {
     this.image;
     this.source;
     this.url;
+    this.content;
     this.titleID = this.title.replace(/[^A-Z0-9]+/ig, "-");
-
-    console.log('ionViewDidLoad User: ' + this.uid + ' ArticleDetailPage ' + this.titleID);
-
-    //this.comments = this.db.list("article-data/"+this.titleID+"-comments").valueChanges()
-    //  .map((array) => array.reverse()) as Observable<any[]>;
 
     this.followees = this.db.list("user-data/" + this.uid + "-followees").valueChanges();
     this.followers = this.db.list("user-data/" + this.uid + "-followers").valueChanges();
 
     this.voteCount = this.db.list("article-data/" + this.titleID  + "-votes").valueChanges();
-    this.hasLiked = this.db.object("article-data/" + this.titleID  + "-votes/" + this.uid).valueChanges();
-    console.log(this.hasLiked)
-      this.voteCount.subscribe(results => {
-        for (let result of results) {
 
+    this.userVoteKey = this.db.list("article-data/" + this.titleID  + "-votes").snapshotChanges();
+    this.userVoteKey.subscribe(keyResults => {
+        for (let keyResult of keyResults) {
+            if (keyResult.payload.val().uid === this.uid) {
+              this.voteKey = keyResult.key;
+              this.hasLiked = true;
+            }
         }
-      })
+    })
+      
+    this.userVoteActivityKey = this.db.list("user-data/" + this.uid + "-activity").snapshotChanges();
+    this.userVoteActivityKey.subscribe(keyResults => {
+        for (let keyResult of keyResults) {
+          if (keyResult.payload.val().description === this.description) {
+            this.voteActivityKey = keyResult.key;
+        }
+      }
+    })
+    
+    this.voteActivityFollowers = this.db.list('user-data/' + this.uid + '-followers').valueChanges();
+    this.voteActivityFollowers.subscribe(results => {
+      for (let result of results) {
+        this.voteActivityFollowerKey = this.db.list('user-data/' + result.followerUid + '-followee-activity').snapshotChanges();
+        this.voteActivityFollowerKey.subscribe(keyResults => {
+          for (let keyResult of keyResults)
+            if (keyResult.payload.val().description === this.description) {    
+              this.voteFollowerKeys.push(keyResult.key)
+            }
+        })
+      }
+    })
+        
     this.cMCount = this.db.list("article-data/" + this.titleID + "-cm").valueChanges();
+    this.cMCount.subscribe(results => {
+      for (let result of results) {
+        if (result.uid === this.uid) {
+          this.hasCM = true;
+        }
+      }
+    })
     this.dSCount = this.db.list("article-data/" + this.titleID + "-ds").valueChanges();
-    //this.commentCount = this.db.list("article-data/"+this.titleID+"-comments").valueChanges()
+    this.readCount = this.db.list("article-data/" + this.titleID + "-reads").valueChanges();
   }
 
   twoThumbsUp() {
@@ -106,6 +147,37 @@ export class ArticleDetailPage {
           title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
         }});
   }
+
+  decTwoThumbsUp() {
+
+    if (this.hasLiked) {
+      const voteRef = this.db.list("article-data/" + this.titleID  + "-votes");
+        voteRef.remove(this.voteKey);
+      
+      const voteActivityRef = this.db.list("user-data/" + this.uid + "-activity");
+        voteActivityRef.remove(this.voteActivityKey);
+      
+      this.followers = this.db.list('user-data/' + this.uid + '-followers').valueChanges();
+      this.followers.subscribe(followers => { 
+        for (let follower of followers) {
+          let userID = follower.followerUid;
+          this.voteFollowerActivityRef = this.db.list("user-data/" + userID + "-followee-activity").snapshotChanges();
+          this.voteFollowerActivityRef.subscribe(items => {
+            for (let item of items) {
+              for (let voteKey of this.voteFollowerKeys) {
+                if (item.key === voteKey) {
+                  const newFollowerRef = this.db.list("user-data/" + userID + "-followee-activity");
+                  newFollowerRef.remove(voteKey)
+                } 
+              }
+            }
+          })
+        }
+      })
+      this.hasLiked = false;
+      }
+  }
+    
 
   changedMind() {
     
@@ -146,6 +218,12 @@ export class ArticleDetailPage {
   }
 
   openWebpage() {
+
+    const articleReads = this.db.list("article-data/" + this.titleID + "-reads");
+    articleReads.push({ uid: (this.uid), username: (this.displayName),
+      url: (this.url), description: (this.description), source: (this.source),
+      title: (this.title), urlToImage: (this.image), hasReadIsTrue: (true) });
+
 
     const options: ThemeableBrowserOptions = {
       statusbar: {

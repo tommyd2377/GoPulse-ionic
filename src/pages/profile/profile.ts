@@ -36,8 +36,6 @@ export class ProfilePage {
 
   ionViewDidLoad() {
         
-    console.log('ionViewDidLoad User: ' + (this.uid) + ' ProfilePage');
-        
     var activity = this.uid+"-activity";
 
     this.followerCount = this.db.list("user-data/" + (this.uid) + "-followers").valueChanges();

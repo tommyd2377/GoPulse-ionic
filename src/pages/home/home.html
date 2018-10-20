@@ -12,7 +12,10 @@
     <ion-list style="max-width: 600px; margin-right: auto; margin-left: auto">
       <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" *ngFor="let active of activity | async" 
         (click)="goToDetailPage($event, active)" class="background" text-wrap padding-bottom>
-       
+        <div *ngIf="activity?.length < 1">
+          <hr>
+            <p style="color: #2AB759">No results found :(</p>
+          </div>
         <ion-item class="background">
             <ion-avatar item-start>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL">

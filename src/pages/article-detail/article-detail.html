@@ -16,15 +16,20 @@
       
       <button ion-button icon-start color="secondary" clear (click)="openWebpage()">
         <ion-icon name="open"></ion-icon>
-        0
+        {{ (readCount | async)?.length }}
       </button>
    
-      <button ion-button icon-start color="secondary" clear (click)="twoThumbsUp()">
+      <button *ngIf="!hasLiked" ion-button icon-start color="secondary" clear (click)="twoThumbsUp()">
         <ion-icon name="share-alt"></ion-icon>
         {{ (voteCount | async)?.length }}
       </button>
 
-      <button ion-button icon-start color="secondary" clear (click)="changedMind()">
+      <button *ngIf="hasLiked" ion-button icon-start color="secondary" clear (click)="decTwoThumbsUp()">
+        <ion-icon name="share-alt"></ion-icon>
+        {{ (voteCount | async)?.length }}
+      </button>
+
+      <button [disabled]="hasCM" ion-button icon-start color="secondary" clear (click)="changedMind()">
           <ion-icon name="swap"></ion-icon>
           {{ (cMCount | async)?.length }}
         </button>
@@ -39,6 +44,7 @@
 
     <h2 class="white-text" padding>{{ title }}</h2>
     <p class="white-text" padding>{{ description }}</p>
+    <p class="white-text" padding>{{ content }}</p>
   
 
 </ion-content>

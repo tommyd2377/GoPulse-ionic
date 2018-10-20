@@ -25,7 +25,7 @@ export class FolloweesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FolloweesPage');
-    var uidFollowees = this.uid+"-followees";
+    var uidFollowees = this.uid + "-followees";
     this.followees = this.afDB.list('user-data/' + uidFollowees).valueChanges();
     console.log(this.followees)
   }
