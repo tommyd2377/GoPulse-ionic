@@ -31,14 +31,6 @@
     <ion-label  style="color: white" for="password" floating>Password</ion-label>
     <ion-input  style="color: white" type="password" [(ngModel)]="password" formControlName="password" required></ion-input>
     </ion-item>
-    <!-- <ion-item class="background">
-        <ion-label  style="color: white" floating>Card Number</ion-label>
-        <ion-input  style="color: white" type="password" ></ion-input>
-        </ion-item>
-        <ion-item class="background">
-            <ion-label  style="color: white" floating>Experation Date</ion-label>
-            <ion-input  style="color: white" type="password"></ion-input>
-            </ion-item> -->
     <br>
     <div style="color: red" *ngIf="formErrors.email">
         {{ formErrors.email }}

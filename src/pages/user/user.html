@@ -44,8 +44,8 @@
           <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" *ngFor="let active of activity | async" 
             (click)="goToDetailPage($event, active)" class="background" text-wrap padding-bottom>
       
-      <h2 style="color: #2AB759" *ngIf="active.twoThumbsUpIsTrue">{{ displayName }}<span style="color: white"> shared this</span></h2>
-      <h2 style="color: #2AB759" *ngIf="active.changedMindIsTrue">{{ displayName }}<span style="color: white"> found this article that expanded their perspective</span></h2>
+      <h2 style="color: #2AB759" *ngIf="active.twoThumbsUpIsTrue">{{ displayName }}<span style="color: white"> shared an article</span></h2>
+      <h2 style="color: #2AB759" *ngIf="active.changedMindIsTrue">{{ displayName }}<span style="color: white"> found an article that expanded their perspective</span></h2>
       <img padding-top *ngIf="active.twoThumbsUpIsTrue" [src]="active.urlToImage">
       <img padding-top *ngIf="active.changedMindIsTrue" [src]="active.urlToImage">
 

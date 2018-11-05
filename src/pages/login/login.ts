@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { TabsPage } from '../tabs/tabs';
+import * as firebase from 'firebase/app';
 
 @IonicPage()
 @Component({
@@ -11,12 +13,15 @@ import { TabsPage } from '../tabs/tabs';
 
 export class LoginPage {
 
-  email;
-  password;
+  email: string;
+  password: string;
+  date;
+  currentTime: number;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
-              private afAuth: AngularFireAuth) {
+              private afAuth: AngularFireAuth,
+              private db: AngularFireDatabase) {
     this.afAuth.authState.subscribe( (user) => {
       if (user) {
         this.navCtrl.setRoot(TabsPage,{})
@@ -25,12 +30,16 @@ export class LoginPage {
   }
 
   userLogin() {
-    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-    this.afAuth.authState.subscribe( (user) => {
-      if (user) {
-
-      }
+    return this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
+    .then(() => {
+      this.date = new Date();
+      this.currentTime = this.date.getTime();
+      let user = firebase.auth().currentUser
+      let uid = user.uid
+      const userData = this.db.object('user-data/' + uid);
+        userData.update({ signedIn: (this.currentTime)})
+      this.navCtrl.push(TabsPage);
     })
-    this.navCtrl.push(TabsPage)
+    .catch(error => console.log(error));
   } 
 }

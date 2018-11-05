@@ -19,6 +19,8 @@ export class SignupPage {
   password: string;
   displayName: string;
   fullName: string;
+  date;
+  currentTime;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -52,6 +54,8 @@ export class SignupPage {
   }
 
   createUser() {
+    this.date = new Date();
+    this.currentTime = this.date.getTime()
     return this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
       .then(() => {
         let user = firebase.auth().currentUser
@@ -60,10 +64,10 @@ export class SignupPage {
           displayName: (this.displayName),
           photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL',
         })
-      let uid = user.uid;
+      let uid = user.uid
       const userData = this.db.object('user-data/' + uid);
       userData.set({ fullname: (this.fullName), displayName: (this.displayName), 
-      email: (this.email), uid: (uid)});
+      email: (this.email), uid: (uid), signedUp: (this.currentTime), signedIn: (this.currentTime)});
       })
       .catch(error => console.log(error));
   }
