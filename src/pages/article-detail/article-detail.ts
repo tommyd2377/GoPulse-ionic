@@ -51,8 +51,10 @@ export class ArticleDetailPage {
   user = firebase.auth().currentUser;
   uid = this.user.uid; 
   displayName = this.user.displayName;
+  date;
+  currentTime;
 
-  title: string = this.navParams.get('title');
+  title: string = this.navParams.get('title' || 'title1');
   description: string = this.navParams.get('description');
   image: string = this.navParams.get('urlToImage');
   url: string = this.navParams.get('url');
@@ -63,10 +65,8 @@ export class ArticleDetailPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private themeableBrowser: ThemeableBrowser,
-              private db: AngularFireDatabase) {
-                
-               }
-              
+              private db: AngularFireDatabase) { }
+               
   ionViewDidLoad() {
     
     this.title;
@@ -128,13 +128,18 @@ export class ArticleDetailPage {
 
   twoThumbsUp() {
 
+    this.date = new Date();
+    this.currentTime = this.date.getTime();
+
+    console.log(this.description)
+
     const articleVotes = this.db.list("article-data/" + this.titleID + "-votes");
       articleVotes.push({ uid: (this.uid), username: (this.displayName),
-      url: (this.url), description: (this.description), source: (this.source),
+      url: (this.url), description: (this.description), source: (this.source), createdAt: (this.currentTime),
       title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
 
     const activity = this.db.list("user-data/" + this.uid + "-activity");
-      activity.push({ uid: (this.uid), username: (this.displayName),
+      activity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
       url: (this.url), description: (this.description), source: (this.source),
       title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
 
@@ -142,7 +147,7 @@ export class ArticleDetailPage {
       this.followers.subscribe(results => {
         for (let result of results) {
           const followerActivity =  this.db.list('user-data/' + result.followerUid + '-followee-activity');
-          followerActivity.push({ uid: (this.uid), username: (this.displayName),
+          followerActivity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
           url: (this.url), description: (this.description), source: (this.source),
           title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
         }});
@@ -180,14 +185,17 @@ export class ArticleDetailPage {
     
 
   changedMind() {
+
+    this.date = new Date();
+    this.currentTime = this.date.getTime()
     
     const articleVotes = this.db.list("article-data/"+(this.titleID)+"-cm");
-      articleVotes.push({ uid: (this.uid), username: (this.displayName),
+      articleVotes.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
       url: (this.url), description: (this.description), source: (this.source),
       title: (this.title), urlToImage: (this.image), changedMindIsTrue: (true) });
 
     const activity = this.db.list("user-data/"+this.uid+"-activity");
-      activity.push({ uid: (this.uid), username: (this.displayName),
+      activity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
       url: (this.url), description: (this.description), source: (this.source),
       title: (this.title), urlToImage: (this.image), changedMindIsTrue: (true) });
 
@@ -195,7 +203,7 @@ export class ArticleDetailPage {
       this.followers.subscribe(results => {
         for (let result of results) {
           const followerCMActivity =  this.db.list('user-data/'+result.followerUid+'-followee-activity');
-          followerCMActivity.push({ uid: (this.uid), username: (this.displayName),
+          followerCMActivity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
           url: (this.url), description: (this.description), source: (this.source),
           title: (this.title), urlToImage: (this.image), changedMindIsTrue: (true) });
         }});
@@ -219,19 +227,22 @@ export class ArticleDetailPage {
 
   openWebpage() {
 
+    this.date = new Date();
+    this.currentTime = this.date.getTime()
+
     const articleReads = this.db.list("article-data/" + this.titleID + "-reads");
-    articleReads.push({ uid: (this.uid), username: (this.displayName),
+    articleReads.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
       url: (this.url), description: (this.description), source: (this.source),
       title: (this.title), urlToImage: (this.image), hasReadIsTrue: (true) });
 
 
     const options: ThemeableBrowserOptions = {
       statusbar: {
-          color: '#2AB759'
+          color: 'rgb(0, 110, 255)'
       },
       toolbar: {
           height: 44,
-          color: '#2AB759'
+          color: 'rgb(0, 110, 255)'
       },
       title: {
           color: '#003264ff',

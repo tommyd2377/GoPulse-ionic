@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Content } from 'ionic-angular';
 import { ArticleDetailPage } from '../article-detail/article-detail';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'page-home',
@@ -15,14 +15,12 @@ export class HomePage {
 
   user = firebase.auth().currentUser;
   uid = this.user.uid;
-
   activity: Observable<any[]>;
 
   @ViewChild(Content) content: Content;
   
   constructor(public navCtrl: NavController,
               private afDB: AngularFireDatabase,
-              private afAuth: AngularFireAuth,
               public navParams: NavParams) {
   }
 
@@ -41,7 +39,7 @@ export class HomePage {
   goToDetailPage(event, active) {
     this.navCtrl.push(ArticleDetailPage, active)
   }
-    
+
 }
 
 

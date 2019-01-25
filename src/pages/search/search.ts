@@ -26,8 +26,7 @@ export class SearchPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private search: SearchProvider) {
-                this.showUserSearch()
-              
+    this.showUserSearch()
   }
 
   ionViewDidLoad() {

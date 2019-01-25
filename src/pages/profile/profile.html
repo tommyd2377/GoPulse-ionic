@@ -3,9 +3,11 @@
     
     <ion-title>Profile</ion-title>
       
-    <button ion-button color="secondary" outline (click)="goToSettingsPage()">
-      <ion-icon name="settings"></ion-icon>
-    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToSettingsPage()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   
   </ion-navbar>
 </ion-header>
@@ -15,7 +17,7 @@
   <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" class="background">
     
     <ion-avatar item-start>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL">
+      <img src="https://tomdevito.org/dist/img/portrait.jpg">
     </ion-avatar>
         
     <h2 style="color: white">{{ (userData | async)?.displayName }}</h2>
@@ -38,13 +40,13 @@
       <ion-item style="max-width: 600px; margin-right: auto; margin-left: auto" *ngFor="let active of activity | async" 
         (click)="goToDetailPage($event, active)" class="background" text-wrap padding-bottom>
         
-      <h2 style="color: #2AB759" *ngIf="active.twoThumbsUpIsTrue" padding-bottom>You shared an article</h2>
-      <h2 style="color: #2AB759" *ngIf="active.changedMindIsTrue" padding-bottom>You found an article that expanded your perspective</h2>
+      <h2 style="color: rgb(0, 110, 255)" *ngIf="active.twoThumbsUpIsTrue" padding-bottom>You shared an article</h2>
+      <h2 style="color: rgb(0, 110, 255)" *ngIf="active.changedMindIsTrue" padding-bottom>You found an article that expanded your perspective</h2>
       <img *ngIf="active.twoThumbsUpIsTrue" [src]="active.urlToImage">
       <img *ngIf="active.changedMindIsTrue" [src]="active.urlToImage">
 
-      <h2 style="color: #2AB759" *ngIf="active.followedIsTrue" text-wrap  padding-bottom>{{ active.followerUsername }} started following you</h2>
-      <h2 style="color: #2AB759" *ngIf="active.followingIsTrue" text-wrap  padding-bottom>You started following {{ active.followeeUsername }}</h2>
+      <h2 style="color: rgb(0, 110, 255)" *ngIf="active.followedIsTrue" text-wrap  padding-bottom>{{ active.followerUsername }} started following you</h2>
+      <h2 style="color: rgb(0, 110, 255)" *ngIf="active.followingIsTrue" text-wrap  padding-bottom>You started following {{ active.followeeUsername }}</h2>
             
       <h1 style="color: white" *ngIf="active.twoThumbsUpIsTrue" padding-top>
         {{ active.title }}
@@ -54,8 +56,8 @@
         {{ active.title }}
       </h1>
               
-      <h3 style="color: #2AB759" *ngIf="active.twoThumbsUpIsTrue" padding-top padding-bottom>{{ active.source.name }}</h3>
-      <h3 style="color: #2AB759" *ngIf="active.changedMindIsTrue" padding-top padding-bottom>{{ active.source.name }}</h3>
+      <h3 style="color: rgb(0, 110, 255)" *ngIf="active.twoThumbsUpIsTrue" padding-top padding-bottom>{{ active.source.name }}</h3>
+      <h3 style="color: rgb(0, 110, 255)" *ngIf="active.changedMindIsTrue" padding-top padding-bottom>{{ active.source.name }}</h3>
         
       </ion-item>
     </ion-list>

@@ -26,18 +26,19 @@
         <ion-list class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
           <ion-item  *ngFor="let user of userResults" (click)="goToUserProfile($event, user)" class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
             <ion-avatar item-start>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROB37n5Wb_TTtHjAJoQq319S29DJT4tlthJQrp0tqfotqac6nL">
+              <img src="https://tomdevito.org/dist/img/portrait.jpg">
             </ion-avatar>
-            <h2 style="color: #2AB759">{{ user?.fullname }}</h2>
-            <p style="color: #2AB759">{{ user?.displayName }}</p>
+            <h2 style="color: rgb(0, 110, 255)">{{ user?.fullname }}</h2>
+            <p style="color: rgb(0, 110, 255)">{{ user?.displayName }}</p>
           </ion-item>
         </ion-list>   
       <div *ngIf="userResults?.length < 1">
         <hr>
-          <p style="color: #2AB759">No results found :(</p>
+          <p style="color: rgb(0, 110, 255)">No results found :(</p>
         </div>
     </div>
           
+    
     <div *ngIf="searchingPublishers">
       <ion-searchbar *ngSwitchCase="'publisherSearch'" type="search" (ionInput)="searchPublishers($event)" placeholder="search publishers..." class="input"></ion-searchbar>
       <ion-list class="background" style="max-width: 600px; margin-right: auto; margin-left: auto">
@@ -45,12 +46,12 @@
             <ion-thumbnail item-start>
               <img src="{{ publisher?.image }}">
             </ion-thumbnail>
-            <h2 style="color: #2AB759">{{ publisher?.name }}</h2>
+            <h2 style="color: rgb(0, 110, 255)">{{ publisher?.name }}</h2>
           </ion-item>
         </ion-list>    
       <div *ngIf="publisherResults?.length < 1">
         <hr>
-          <p style="color: #2AB759">No results found :(</p>
+          <p style="color: rgb(0, 110, 255)">No results found :(</p>
       </div>
     </div>
     </div>

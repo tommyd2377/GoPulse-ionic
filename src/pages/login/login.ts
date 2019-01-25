@@ -16,7 +16,7 @@ export class LoginPage {
   email: string;
   password: string;
   date;
-  currentTime: number;
+  currentTime;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 

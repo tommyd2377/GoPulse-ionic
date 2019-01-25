@@ -59,13 +59,15 @@ export class PublisherPage {
   }
 
   showAll() {
-    this.getAllArticles();
     this.toggleTop = false;
     this.toggleAll = true;
+    if (!this.allResults) {
+      this.getAllArticles();
+    }
   }
 
   getTopArticles() {
-    this.topUrl = 'https://newsapi.org/v2/top-headlines?sources=' + this.id + '&language=en&apiKey=' + this.apiKey;
+    this.topUrl = 'https://newsapi.org/v2/top-headlines?sources=' + this.id + '&language=en&pageSize=100&apiKey=' + this.apiKey;
       this.http.get(this.topUrl)
         .map(res => res.json())
           .subscribe(
@@ -73,7 +75,8 @@ export class PublisherPage {
               this.topResults = topResults.articles;
               console.log(this.topResults)
             }
-          )}
+          )
+  }
 
   getAllArticles() {
     this.allUrl = 'https://newsapi.org/v2/everything?sources=' + this.id + '&language=en&pageSize=100&apiKey=' + this.apiKey;
@@ -84,5 +87,6 @@ export class PublisherPage {
               this.allResults = allResults.articles;
               console.log(this.allResults)
             }
-          )}
+          )
+  }
 }

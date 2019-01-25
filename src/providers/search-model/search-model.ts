@@ -15,14 +15,14 @@ export class SearchProvider {
     return Observable.zip(start, end).switchMap(param => {
     return this.db.list("/user-data", ref =>
        
-    ref.orderByChild("fullname").limitToFirst(100).startAt(param[0]).endAt(param[1]))
-        .snapshotChanges().map(changes => {
-         
-          return changes.map(c => {
-          return { key: c.payload.key, ...c.payload.val() };
+      ref.orderByChild("fullname").limitToFirst(100).startAt(param[0]).endAt(param[1]))
+          .snapshotChanges().map(changes => {
           
+            return changes.map(c => {
+            return { key: c.payload.key, ...c.payload.val() };
+            
+            });
           });
-        });
     });
   }
 
