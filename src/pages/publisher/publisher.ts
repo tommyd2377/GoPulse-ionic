@@ -61,9 +61,9 @@ export class PublisherPage {
   showAll() {
     this.toggleTop = false;
     this.toggleAll = true;
-    if (!this.allResults) {
+ 
       this.getAllArticles();
-    }
+    
   }
 
   getTopArticles() {
