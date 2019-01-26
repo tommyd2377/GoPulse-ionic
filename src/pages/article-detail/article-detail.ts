@@ -54,7 +54,7 @@ export class ArticleDetailPage {
   date;
   currentTime;
 
-  title: string = this.navParams.get('title' || 'title1');
+  title: string = this.navParams.get('title');
   description: string = this.navParams.get('description');
   image: string = this.navParams.get('urlToImage');
   url: string = this.navParams.get('url');
@@ -76,6 +76,9 @@ export class ArticleDetailPage {
     this.url;
     this.content;
     this.titleID = this.title.replace(/[^A-Z0-9]+/ig, "-");
+
+    console.log('des ' + this.description)
+    console.log('content ' + this.content)
 
     this.followees = this.db.list("user-data/" + this.uid + "-followees").valueChanges();
     this.followers = this.db.list("user-data/" + this.uid + "-followers").valueChanges();
@@ -131,16 +134,16 @@ export class ArticleDetailPage {
     this.date = new Date();
     this.currentTime = this.date.getTime();
 
-    console.log(this.description)
+    console.log('des ' + this.description)
 
     const articleVotes = this.db.list("article-data/" + this.titleID + "-votes");
-      articleVotes.push({ uid: (this.uid), username: (this.displayName),
+      articleVotes.push({ uid: (this.uid), username: (this.displayName), content: (this.content),
       url: (this.url), description: (this.description), source: (this.source), createdAt: (this.currentTime),
       title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
 
     const activity = this.db.list("user-data/" + this.uid + "-activity");
       activity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
-      url: (this.url), description: (this.description), source: (this.source),
+      url: (this.url), description: (this.description), source: (this.source), content: (this.content),
       title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
 
       this.followers = this.db.list('user-data/' + this.uid + '-followers').valueChanges();
@@ -148,7 +151,7 @@ export class ArticleDetailPage {
         for (let result of results) {
           const followerActivity =  this.db.list('user-data/' + result.followerUid + '-followee-activity');
           followerActivity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
-          url: (this.url), description: (this.description), source: (this.source),
+          url: (this.url), description: (this.description), source: (this.source), content: (this.content),
           title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
         }});
   }
@@ -186,27 +189,6 @@ export class ArticleDetailPage {
 
   changedMind() {
 
-    this.date = new Date();
-    this.currentTime = this.date.getTime()
-    
-    const articleVotes = this.db.list("article-data/"+(this.titleID)+"-cm");
-      articleVotes.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
-      url: (this.url), description: (this.description), source: (this.source),
-      title: (this.title), urlToImage: (this.image), changedMindIsTrue: (true) });
-
-    const activity = this.db.list("user-data/"+this.uid+"-activity");
-      activity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
-      url: (this.url), description: (this.description), source: (this.source),
-      title: (this.title), urlToImage: (this.image), changedMindIsTrue: (true) });
-
-      this.followers = this.db.list('user-data/'+this.uid+'-followers').valueChanges();
-      this.followers.subscribe(results => {
-        for (let result of results) {
-          const followerCMActivity =  this.db.list('user-data/'+result.followerUid+'-followee-activity');
-          followerCMActivity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
-          url: (this.url), description: (this.description), source: (this.source),
-          title: (this.title), urlToImage: (this.image), changedMindIsTrue: (true) });
-        }});
   }
 
   directSend() {

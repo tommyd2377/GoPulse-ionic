@@ -47,7 +47,7 @@ export class PulsePage {
   }
 
   triggerWorld() {
-    this.worldArticles = "https://newsapi.org/v2/top-headlines?language=en&sortBy=popularity&pageSize=100&apiKey=" + this.apiKey;
+    this.worldArticles = "https://newsapi.org/v2/top-headlines?language=en&pageSize=100&apiKey=" + this.apiKey;
       this.http.get(this.worldArticles)
         .map(res => res.json())
           .subscribe(
@@ -65,7 +65,7 @@ export class PulsePage {
   )}
 
   triggerUS() {
-    this.usArticles = "https://newsapi.org/v2/top-headlines?country=us&sortBy=popularity&pageSize=100&apiKey=" + this.apiKey;
+    this.usArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&apiKey=" + this.apiKey;
       this.http.get(this.usArticles)
         .map(res => res.json())
           .subscribe(
@@ -83,7 +83,7 @@ export class PulsePage {
   )}
 
   triggerBusiness() {
-      this.businessArticles = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=" + this.apiKey;
+      this.businessArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&category=business&apiKey=" + this.apiKey;
         this.http.get(this.businessArticles)
           .map(res => res.json())
             .subscribe(
@@ -119,7 +119,7 @@ export class PulsePage {
   )}
 
   triggerTechnology() {
-    this.technologyArticles = "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=" + this.apiKey;
+    this.technologyArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&category=technology&apiKey=" + this.apiKey;
       this.http.get(this.technologyArticles)
         .map(res => res.json())
           .subscribe(
@@ -137,7 +137,7 @@ export class PulsePage {
   )}
 
   triggerScience() {
-    this.scienceArticles = "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=" + this.apiKey;
+    this.scienceArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&category=science&apiKey=" + this.apiKey;
       this.http.get(this.scienceArticles)
         .map(res => res.json())
           .subscribe(
@@ -155,7 +155,7 @@ export class PulsePage {
   )}
 
   triggerEntertainment() {
-    this.entertainmentArticles = "https://newsapi.org/v2/top-headlines?country=us&sortBy=popularity&category=entertainment&apiKey=" + this.apiKey;
+    this.entertainmentArticles = "https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=" + this.apiKey;
       this.http.get(this.entertainmentArticles)
         .map(res => res.json())
           .subscribe(
@@ -173,7 +173,7 @@ export class PulsePage {
   )}
 
   triggerSports() {
-    this.sportsArticles = "https://newsapi.org/v2/top-headlines?country=us&language=en&sortBy=popularity&category=sports&apiKey=" + this.apiKey;
+    this.sportsArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&category=sports&apiKey=" + this.apiKey;
       this.http.get(this.sportsArticles)
         .map(res => res.json())
           .subscribe(
