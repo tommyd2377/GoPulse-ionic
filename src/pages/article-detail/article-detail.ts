@@ -17,7 +17,6 @@ export class ArticleDetailPage {
   activity: Observable<any[]>;
   articleVotes: Observable<any[]>;
   articleReads: Observable<any[]>;
-  articleCM: Observable<any[]>;
   voteCount: Observable<any[]>;
   voteActivity: Observable<any[]>;
   voteActivityFollowers: Observable<any[]>;
@@ -28,7 +27,6 @@ export class ArticleDetailPage {
   userVoteActivityKey: Observable<any[]>;
   voteKey: string;
   voteActivityKey: string;
-  cMCount: Observable<any[]>;
   readCount: Observable<any[]>;
   commentCount: Observable<any[]>;
   dSCount: Observable<any[]>;
@@ -39,14 +37,12 @@ export class ArticleDetailPage {
   comments: Observable<any[]>;
   comment: string;
   twoThumbsUpIsTrue: boolean;
-  changedMindIsTrue: boolean;
   commentIsTrue: boolean;
   username: string;
   followers: Observable<any[]>;
   followees: Observable<any[]>;
   results = [];
   hasLiked: boolean;
-  hasCM: boolean;
   voteFollowerKeys = [];
   user = firebase.auth().currentUser;
   uid = this.user.uid; 
@@ -116,25 +112,16 @@ export class ArticleDetailPage {
         })
       }
     })
-        
-    this.cMCount = this.db.list("article-data/" + this.titleID + "-cm").valueChanges();
-    this.cMCount.subscribe(results => {
-      for (let result of results) {
-        if (result.uid === this.uid) {
-          this.hasCM = true;
-        }
-      }
-    })
+
     this.dSCount = this.db.list("article-data/" + this.titleID + "-ds").valueChanges();
     this.readCount = this.db.list("article-data/" + this.titleID + "-reads").valueChanges();
   }
 
   twoThumbsUp() {
-
+    
+    this.hasLiked = true;
     this.date = new Date();
     this.currentTime = this.date.getTime();
-
-    console.log('des ' + this.description)
 
     const articleVotes = this.db.list("article-data/" + this.titleID + "-votes");
       articleVotes.push({ uid: (this.uid), username: (this.displayName), content: (this.content),
@@ -146,14 +133,15 @@ export class ArticleDetailPage {
       url: (this.url), description: (this.description), source: (this.source), content: (this.content),
       title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
 
-      this.followers = this.db.list('user-data/' + this.uid + '-followers').valueChanges();
-      this.followers.subscribe(results => {
-        for (let result of results) {
-          const followerActivity =  this.db.list('user-data/' + result.followerUid + '-followee-activity');
-          followerActivity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
-          url: (this.url), description: (this.description), source: (this.source), content: (this.content),
-          title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
-        }});
+    this.followers = this.db.list('user-data/' + this.uid + '-followers').valueChanges();
+    this.followers.subscribe(results => {
+      for (let result of results) {
+        const followerActivity =  this.db.list('user-data/' + result.followerUid + '-followee-activity');
+        followerActivity.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
+        url: (this.url), description: (this.description), source: (this.source), content: (this.content),
+        title: (this.title), urlToImage: (this.image), twoThumbsUpIsTrue: (true) });
+      }
+    });
   }
 
   decTwoThumbsUp() {
@@ -183,11 +171,10 @@ export class ArticleDetailPage {
         }
       })
       this.hasLiked = false;
-      }
+    }
   }
     
-
-  changedMind() {
+  newComment() {
 
   }
 

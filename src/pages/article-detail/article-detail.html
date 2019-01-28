@@ -29,7 +29,7 @@
         {{ (voteCount | async)?.length }}
       </button>
 
-      <button [disabled]="hasCM" ion-button icon-start color="secondary" clear (click)="changedMind()">
+      <button ion-button icon-start color="secondary" clear>
           <ion-icon name="swap"></ion-icon>
           {{ (cMCount | async)?.length }}
         </button>

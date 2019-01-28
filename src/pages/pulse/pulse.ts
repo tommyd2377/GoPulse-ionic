@@ -14,27 +14,35 @@ export class PulsePage {
   worldArticles: string;
   worldResults = [];
   triggerWorldArticles: boolean;
+  
   usArticles: string;
   usResults = [];
   triggerUSArticles: boolean;
+  
   businessArticles: string;
   businessResults = [];
   triggerBusinessArticles: boolean;
+  
   healthArticles: string;
   healthResults = [];
   triggerHealthArticles: boolean;
+  
   technologyArticles: string;
   technologyResults = [];
   triggerTechnologyArticles: boolean;
+  
   scienceArticles: string;
   scienceResults = [];
   triggerScienceArticles: boolean;
+  
   entertainmentArticles: string;
   entertainmentResults = [];
   triggerEntertainmentArticles: boolean;
+  
   sportsArticles: string;
   sportsResults = [];
   triggerSportsArticles: boolean;
+  
   apiKey: string = "f479cb7134e548bca82908661da32403";
   category: string = "world";
 
@@ -46,13 +54,21 @@ export class PulsePage {
     this.triggerWorld()
   }
 
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
   triggerWorld() {
     this.worldArticles = "https://newsapi.org/v2/top-headlines?language=en&pageSize=100&apiKey=" + this.apiKey;
       this.http.get(this.worldArticles)
         .map(res => res.json())
           .subscribe(
             topResults => {
-              this.worldResults = topResults.articles;
+              this.worldResults = this.shuffle(topResults.articles);
               this.triggerWorldArticles = true;
               this.triggerUSArticles = false;
               this.triggerBusinessArticles = false;
@@ -226,5 +242,4 @@ export class PulsePage {
     this.navCtrl.push(ArticleDetailPage, healthResult)
   }
 
-  
 }
