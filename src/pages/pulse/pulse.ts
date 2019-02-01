@@ -43,6 +43,7 @@ export class PulsePage {
   sportsResults = [];
   triggerSportsArticles: boolean;
   
+  baseURL: string = "https://newsapi.org/v2/top-headlines?"
   apiKey: string = "f479cb7134e548bca82908661da32403";
   category: string = "world";
 
@@ -54,21 +55,21 @@ export class PulsePage {
     this.triggerWorld()
   }
 
-  shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
+  shuffleArticles(articles) {
+    for (let i = articles.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+        [articles[i], articles[j]] = [articles[j], articles[i]];
     }
-    return a;
+    return articles;
 }
 
   triggerWorld() {
-    this.worldArticles = "https://newsapi.org/v2/top-headlines?language=en&pageSize=100&apiKey=" + this.apiKey;
+    this.worldArticles = this.baseURL + "language=en&pageSize=100&apiKey=" + this.apiKey;
       this.http.get(this.worldArticles)
         .map(res => res.json())
           .subscribe(
             topResults => {
-              this.worldResults = this.shuffle(topResults.articles);
+              this.worldResults = this.shuffleArticles(topResults.articles);
               this.triggerWorldArticles = true;
               this.triggerUSArticles = false;
               this.triggerBusinessArticles = false;
@@ -81,12 +82,12 @@ export class PulsePage {
   )}
 
   triggerUS() {
-    this.usArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&apiKey=" + this.apiKey;
+    this.usArticles = this.baseURL + "country=us&pageSize=100&apiKey=" + this.apiKey;
       this.http.get(this.usArticles)
         .map(res => res.json())
           .subscribe(
             topResults => {
-              this.usResults = topResults.articles;
+              this.usResults = this.shuffleArticles(topResults.articles);
               this.triggerUSArticles = true;
               this.triggerWorldArticles = false;
               this.triggerBusinessArticles = false;
@@ -99,12 +100,12 @@ export class PulsePage {
   )}
 
   triggerBusiness() {
-      this.businessArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&category=business&apiKey=" + this.apiKey;
+      this.businessArticles = this.baseURL + "country=us&pageSize=100&category=business&apiKey=" + this.apiKey;
         this.http.get(this.businessArticles)
           .map(res => res.json())
             .subscribe(
               topResults => {
-                this.businessResults = topResults.articles;
+                this.businessResults = this.shuffleArticles(topResults.articles);
                 this.triggerWorldArticles = false;
                 this.triggerUSArticles = false;
                 this.triggerBusinessArticles = true;
@@ -117,12 +118,12 @@ export class PulsePage {
   )}
 
   triggerHealth() {
-    this.healthArticles = "https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=" + this.apiKey;
+    this.healthArticles = this.baseURL + "country=us&pageSize=100&category=health&apiKey=" + this.apiKey;
       this.http.get(this.healthArticles)
         .map(res => res.json())
           .subscribe(
             topResults => {
-              this.healthResults = topResults.articles;
+              this.healthResults = this.shuffleArticles(topResults.articles);
               this.triggerHealthArticles = true;
               this.triggerWorldArticles = false;
               this.triggerUSArticles = false;
@@ -135,12 +136,12 @@ export class PulsePage {
   )}
 
   triggerTechnology() {
-    this.technologyArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&category=technology&apiKey=" + this.apiKey;
+    this.technologyArticles = this.baseURL + "country=us&pageSize=100&category=technology&apiKey=" + this.apiKey;
       this.http.get(this.technologyArticles)
         .map(res => res.json())
           .subscribe(
             topResults => {
-              this.technologyResults = topResults.articles;
+              this.technologyResults = this.shuffleArticles(topResults.articles);
               this.triggerWorldArticles = false;
               this.triggerUSArticles = false;
               this.triggerBusinessArticles = false;
@@ -153,12 +154,12 @@ export class PulsePage {
   )}
 
   triggerScience() {
-    this.scienceArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&category=science&apiKey=" + this.apiKey;
+    this.scienceArticles = this.baseURL + "country=us&pageSize=100&category=science&apiKey=" + this.apiKey;
       this.http.get(this.scienceArticles)
         .map(res => res.json())
           .subscribe(
             topResults => {
-              this.scienceResults = topResults.articles;
+              this.scienceResults = this.shuffleArticles(topResults.articles);
               this.triggerWorldArticles = false;
               this.triggerUSArticles = false;
               this.triggerBusinessArticles = false;
@@ -171,12 +172,12 @@ export class PulsePage {
   )}
 
   triggerEntertainment() {
-    this.entertainmentArticles = "https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=" + this.apiKey;
+    this.entertainmentArticles = this.baseURL + "country=us&pageSize=100&category=entertainment&apiKey=" + this.apiKey;
       this.http.get(this.entertainmentArticles)
         .map(res => res.json())
           .subscribe(
             topResults => {
-              this.entertainmentResults = topResults.articles;
+              this.entertainmentResults = this.shuffleArticles(topResults.articles);
               this.triggerWorldArticles = false;
               this.triggerUSArticles = false;
               this.triggerBusinessArticles = false;
@@ -189,12 +190,12 @@ export class PulsePage {
   )}
 
   triggerSports() {
-    this.sportsArticles = "https://newsapi.org/v2/top-headlines?country=us&pageSize=100&category=sports&apiKey=" + this.apiKey;
+    this.sportsArticles = this.baseURL + "country=us&pageSize=100&category=sports&apiKey=" + this.apiKey;
       this.http.get(this.sportsArticles)
         .map(res => res.json())
           .subscribe(
             topResults => {
-              this.sportsResults = topResults.articles;
+              this.sportsResults = this.shuffleArticles(topResults.articles);
               this.triggerWorldArticles = false;
               this.triggerUSArticles = false;
               this.triggerBusinessArticles = false;
