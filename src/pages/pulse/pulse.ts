@@ -45,7 +45,7 @@ export class PulsePage {
   
   baseURL: string = "https://newsapi.org/v2/top-headlines?"
   apiKey: string = "f479cb7134e548bca82908661da32403";
-  category: string = "world";
+  category: string = "us";
 
   @ViewChild(Content) content: Content;
 
@@ -61,25 +61,7 @@ export class PulsePage {
         [articles[i], articles[j]] = [articles[j], articles[i]];
     }
     return articles;
-}
-
-  triggerWorld() {
-    this.worldArticles = this.baseURL + "language=en&pageSize=100&apiKey=" + this.apiKey;
-      this.http.get(this.worldArticles)
-        .map(res => res.json())
-          .subscribe(
-            topResults => {
-              this.worldResults = this.shuffleArticles(topResults.articles);
-              this.triggerWorldArticles = true;
-              this.triggerUSArticles = false;
-              this.triggerBusinessArticles = false;
-              this.triggerHealthArticles = false;
-              this.triggerTechnologyArticles = false;
-              this.triggerSportsArticles = false;
-              this.triggerEntertainmentArticles = false;
-              this.triggerScienceArticles = false;
-            }
-  )}
+  }
 
   triggerUS() {
     this.usArticles = this.baseURL + "country=us&pageSize=100&apiKey=" + this.apiKey;
@@ -90,6 +72,24 @@ export class PulsePage {
               this.usResults = this.shuffleArticles(topResults.articles);
               this.triggerUSArticles = true;
               this.triggerWorldArticles = false;
+              this.triggerBusinessArticles = false;
+              this.triggerHealthArticles = false;
+              this.triggerTechnologyArticles = false;
+              this.triggerSportsArticles = false;
+              this.triggerEntertainmentArticles = false;
+              this.triggerScienceArticles = false;
+            }
+  )}
+
+  triggerWorld() {
+    this.worldArticles = this.baseURL + "language=en&pageSize=100&apiKey=" + this.apiKey;
+      this.http.get(this.worldArticles)
+        .map(res => res.json())
+          .subscribe(
+            topResults => {
+              this.worldResults = this.shuffleArticles(topResults.articles);
+              this.triggerWorldArticles = true;
+              this.triggerUSArticles = false;
               this.triggerBusinessArticles = false;
               this.triggerHealthArticles = false;
               this.triggerTechnologyArticles = false;
