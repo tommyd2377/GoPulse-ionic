@@ -24,20 +24,17 @@
               </ion-avatar>
               <h2 style="color: rgb(0, 110, 255)" *ngIf="active.twoThumbsUpIsTrue" text-wrap padding-bottom>{{ active.username }}<span style="color: white"> shared an article</span></h2>
               <h2 style="color: rgb(0, 110, 255)" *ngIf="active.changedMindIsTrue" text-wrap padding-bottom>{{ active.username }}<span style="color: white"> found an article that expanded their perspective</span></h2>
-          </ion-item>
+        </ion-item>
               
-          
-        
-          
         <img *ngIf="active.twoThumbsUpIsTrue" [src]="active.urlToImage">
-          <img *ngIf="active.changedMindIsTrue" [src]="active.urlToImage">
+        <img *ngIf="active.changedMindIsTrue" [src]="active.urlToImage">
           
-          <h1 style="color: white" *ngIf="active.twoThumbsUpIsTrue" padding-top text-wrap>{{ active.title }}</h1>
-          <h1 style="color: white" *ngIf="active.changedMindIsTrue" padding-top text-wrap>{{ active.title }}</h1>
-          
-          <h3 style="color: rgb(0, 110, 255)" *ngIf="active.twoThumbsUpIsTrue" padding-top padding-bottom text-wrap>{{ active.source.name }}</h3>
-          <h3 style="color: rgb(0, 110, 255)" *ngIf="active.changedMindIsTrue" padding-top padding-bottom text-wrap>{{ active.source.name }}</h3>
-      
+        <h1 style="color: white" *ngIf="active.twoThumbsUpIsTrue" padding-top text-wrap>{{ active.title }}</h1>
+        <h1 style="color: white" *ngIf="active.changedMindIsTrue" padding-top text-wrap>{{ active.title }}</h1>
+        
+        <h3 style="color: rgb(0, 110, 255)" *ngIf="active.twoThumbsUpIsTrue" padding-top padding-bottom text-wrap>{{ active.source.name }}</h3>
+        <h3 style="color: rgb(0, 110, 255)" *ngIf="active.changedMindIsTrue" padding-top padding-bottom text-wrap>{{ active.source.name }}</h3>
+    
       </ion-item>
     </ion-list>
   </ion-grid>

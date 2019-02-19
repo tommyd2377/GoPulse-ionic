@@ -29,6 +29,10 @@ export class HomePage {
         
     this.activity = this.afDB.list('user-data/' + followeeActivity).valueChanges()
       .map((array) => array.reverse()) as Observable<any[]>;
+
+      if (this.activity) {
+        console.log(this.activity);
+      }
   }
 
   ionSelected() {
@@ -40,11 +44,3 @@ export class HomePage {
   }
 
 }
-
-
-
-
-
-
-
-
