@@ -4,7 +4,6 @@ import { ArticleDetailPage } from '../article-detail/article-detail';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'page-home',

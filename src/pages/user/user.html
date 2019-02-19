@@ -23,34 +23,27 @@
       <p style="color: white">{{ followeeFullname }}</p>
       <p style="color: white">{{ followerFullname }}</p>
 
-      <ul>
-    
-        <li style="display: inline-block;">
+      
         <button *ngIf="!isFollowing && !isYou" ion-button color="secondary" outline icon-left (click)="follow()">
           <ion-icon name="person-add"></ion-icon>
             <div>Follow</div>
         </button>
-      </li>
-      <li style="display: inline-block;">
+     
         <button *ngIf="isFollowing" ion-button color="secondary" outline icon-left (click)="unfollow()">
           <ion-icon name="person-add"></ion-icon>
             <div>Unfollow</div>
         </button>
-      </li>
-      <li style="display: inline-block;">
+  
         <button ion-button color="secondary" outline (click)="goToFollowers($event, uid)" icon-left>
           <ion-icon name="people"></ion-icon>
             <div>{{ (followerCount | async)?.length }} Followers</div>
         </button>
-      </li>
-      <li style="display: inline-block;">
+      
         <button ion-button color="secondary" outline (click)="goToFollowees($event, uid)" icon-left>
           <ion-icon name="people"></ion-icon>
             <div>{{ (followeeCount | async)?.length }} Following</div>
         </button>
-      </li>
-
-    </ul>
+      
   
     </ion-item>
 

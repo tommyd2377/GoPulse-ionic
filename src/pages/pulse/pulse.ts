@@ -64,7 +64,7 @@ export class PulsePage {
   }
 
   triggerUS() {
-    this.usArticles = this.baseURL + "country=us&pageSize=100&apiKey=" + this.apiKey;
+    this.usArticles = this.baseURL + "country=us&apiKey=" + this.apiKey;
       this.http.get(this.usArticles)
         .map(res => res.json())
           .subscribe(
@@ -82,7 +82,7 @@ export class PulsePage {
   )}
 
   triggerWorld() {
-    this.worldArticles = this.baseURL + "language=en&pageSize=100&apiKey=" + this.apiKey;
+    this.worldArticles = this.baseURL + "language=en&apiKey=" + this.apiKey;
       this.http.get(this.worldArticles)
         .map(res => res.json())
           .subscribe(
@@ -100,7 +100,7 @@ export class PulsePage {
   )}
 
   triggerBusiness() {
-      this.businessArticles = this.baseURL + "country=us&pageSize=100&category=business&apiKey=" + this.apiKey;
+      this.businessArticles = this.baseURL + "country=us&category=business&apiKey=" + this.apiKey;
         this.http.get(this.businessArticles)
           .map(res => res.json())
             .subscribe(
@@ -118,7 +118,7 @@ export class PulsePage {
   )}
 
   triggerHealth() {
-    this.healthArticles = this.baseURL + "country=us&pageSize=100&category=health&apiKey=" + this.apiKey;
+    this.healthArticles = this.baseURL + "country=us&category=health&apiKey=" + this.apiKey;
       this.http.get(this.healthArticles)
         .map(res => res.json())
           .subscribe(
@@ -136,7 +136,7 @@ export class PulsePage {
   )}
 
   triggerTechnology() {
-    this.technologyArticles = this.baseURL + "country=us&pageSize=100&category=technology&apiKey=" + this.apiKey;
+    this.technologyArticles = this.baseURL + "country=us&category=technology&apiKey=" + this.apiKey;
       this.http.get(this.technologyArticles)
         .map(res => res.json())
           .subscribe(
@@ -154,7 +154,7 @@ export class PulsePage {
   )}
 
   triggerScience() {
-    this.scienceArticles = this.baseURL + "country=us&pageSize=100&category=science&apiKey=" + this.apiKey;
+    this.scienceArticles = this.baseURL + "country=us&category=science&apiKey=" + this.apiKey;
       this.http.get(this.scienceArticles)
         .map(res => res.json())
           .subscribe(
@@ -172,7 +172,7 @@ export class PulsePage {
   )}
 
   triggerEntertainment() {
-    this.entertainmentArticles = this.baseURL + "country=us&pageSize=100&category=entertainment&apiKey=" + this.apiKey;
+    this.entertainmentArticles = this.baseURL + "country=us&category=entertainment&apiKey=" + this.apiKey;
       this.http.get(this.entertainmentArticles)
         .map(res => res.json())
           .subscribe(
@@ -190,7 +190,7 @@ export class PulsePage {
   )}
 
   triggerSports() {
-    this.sportsArticles = this.baseURL + "country=us&pageSize=100&category=sports&apiKey=" + this.apiKey;
+    this.sportsArticles = this.baseURL + "country=us&category=sports&apiKey=" + this.apiKey;
       this.http.get(this.sportsArticles)
         .map(res => res.json())
           .subscribe(
