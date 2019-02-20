@@ -66,7 +66,6 @@ export class SignupPage {
       .then(() => {
         let user = firebase.auth().currentUser
         user.sendEmailVerification().then(() => {
-          console.log("email verification sent")
         }).catch(error => 
           console.log(error));
         user.updateProfile({

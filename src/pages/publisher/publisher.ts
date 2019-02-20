@@ -37,7 +37,6 @@ export class PublisherPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PublisherPage');
     this.id;
     this.name;
     this.description;
@@ -71,7 +70,6 @@ export class PublisherPage {
           .subscribe(
             topResults => {
               this.topResults = topResults.articles;
-              console.log(this.topResults)
             }
           )
   }
@@ -83,7 +81,7 @@ export class PublisherPage {
           .subscribe(
             allResults => {
               this.allResults = allResults.articles;
-              console.log(this.allResults)
+
             }
           )
   }

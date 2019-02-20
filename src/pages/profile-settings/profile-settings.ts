@@ -16,7 +16,6 @@ export class ProfileSettingsPage {
                 this.afAuth.authState.subscribe( (user) => {
                   if (!user) {
                     this.navCtrl.setRoot(WelcomePage,{})
-                    console.log("User: "+(user.uid)+" sign out")
                   }
                 })
   }

@@ -66,7 +66,6 @@ export class UserPage {
                 
 
                   const fullname = this.db.object("user-data/" + this.currentUserUid + "/fullname").valueChanges();
-                  console.log(fullname)
   }
 
   ionViewDidLoad() {

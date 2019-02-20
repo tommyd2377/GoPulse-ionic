@@ -73,8 +73,6 @@ export class ArticleDetailPage {
     this.content;
     this.titleID = this.title.replace(/[^A-Z0-9]+/ig, "-");
 
-    console.log('des ' + this.description)
-    console.log('content ' + this.content)
 
     this.followees = this.db.list("user-data/" + this.uid + "-followees").valueChanges();
     this.followers = this.db.list("user-data/" + this.uid + "-followers").valueChanges();
