@@ -64,7 +64,7 @@ export class PulsePage {
   }
 
   triggerUS() {
-    this.usArticles = this.baseURL + "country=us&apiKey=" + this.apiKey;
+    this.usArticles = "https://newsapi.org/v2/top-headlines?country=us&sortBy=popularity&pageSize=100&apiKey=" + this.apiKey;
       this.http.get(this.usArticles)
         .map(res => res.json())
           .subscribe(

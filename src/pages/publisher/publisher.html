@@ -8,9 +8,10 @@
 
 <ion-content class="background">
 
-  <div style="max-width: 600px; margin-right: auto; margin-left: auto">
-    <img style="margin-left: auto; margin-right: auto; display: block" src="{{ image }}" padding no-border-bottom>
-    <p style="color:white; text-align: center" padding no-border-top>{{ description }}</p>
+  <div style="text-align:center; margin-left: auto; margin-right: auto; display: inline-block; float: none"  padding no-border-bottom>
+    <ion-thumbnail>
+      <img src="{{ image }}"> 
+    </ion-thumbnail>
 
     <ion-toolbar class="background" no-border-top>
       <ion-segment class="background" [(ngModel)]="articleType">

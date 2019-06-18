@@ -161,7 +161,7 @@ export class ArticleDetailPage {
               for (let voteKey of this.voteFollowerKeys) {
                 if (item.key === voteKey) {
                   const newFollowerRef = this.db.list("user-data/" + userID + "-followee-activity");
-                  newFollowerRef.remove(voteKey)
+                  newFollowerRef.remove(voteKey);
                 } 
               }
             }
@@ -198,10 +198,9 @@ export class ArticleDetailPage {
     this.currentTime = this.date.getTime()
 
     const articleReads = this.db.list("article-data/" + this.titleID + "-reads");
-    articleReads.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
+      articleReads.push({ uid: (this.uid), username: (this.displayName), createdAt: (this.currentTime),
       url: (this.url), description: (this.description), source: (this.source),
       title: (this.title), urlToImage: (this.image), hasReadIsTrue: (true) });
-
 
     const options: ThemeableBrowserOptions = {
       statusbar: {
@@ -259,13 +258,12 @@ export class ArticleDetailPage {
           ]
       },
       backButtonCanClose: true
-      };
+    };
 
-      const browser: ThemeableBrowserObject = this.themeableBrowser.create(this.url, '_blank', options);
+    const browser: ThemeableBrowserObject = this.themeableBrowser.create(this.url, '_blank', options);
 
-      browser.on('closePressed').subscribe(data => {
-        browser.close();
-      })
+    browser.on('closePressed').subscribe(data => {
+      browser.close();
+    })
   }
-
 }

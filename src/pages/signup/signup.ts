@@ -32,9 +32,9 @@ export class SignupPage {
       if (user) {
         this.navCtrl.setRoot(TabsPage,{})
           .then(() => {
-
+            console.log("login redirect from signup")
           }).catch(error => 
-            console.log(error))
+            console.log("setRoot error: " + error))
       }
     })
 
@@ -59,29 +59,31 @@ export class SignupPage {
   }
 
   createUser() {
-    this.date = new Date();
-    this.currentTime = this.date.getTime()
-    
     return this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
       .then(() => {
         let user = firebase.auth().currentUser
         user.sendEmailVerification().then(() => {
+          console.log("email verification sent");
         }).catch(error => 
-          console.log(error));
+          console.log("email verification error: " + error));
         user.updateProfile({
           displayName: (this.displayName),
-          photoURL: 'https://tomdevito.org/dist/img/portrait.jpg',
+          photoURL: "",
         }).then(() => {
+            console.log(this.getTime());
             let uid = user.uid
             const userData = this.db.object('user-data/' + uid);
             userData.set({ fullname: (this.fullName), displayName: (this.displayName), 
-            email: (this.email), uid: (uid), signedUp: (this.currentTime), signedIn: (this.currentTime)})
+            email: (this.email), uid: (uid), signedUp: (this.getTime()), signedIn: (this.getTime())})
         })
           .catch(error => 
-            console.log(error));
+            console.log("updateProfile error: " + error));
       })
-    .catch(error => 
-      console.log(error));
+    .catch(error =>
+      //check username
+      //used email
+      //empty strings 
+      console.log("createUser error: " + error));
   }
   
   onValueChanged(data?: any) {
@@ -118,4 +120,10 @@ export class SignupPage {
       'maxlength':     'Password cannot be more than 40 characters long.',
     }
   };
+
+  getTime() {
+    this.date = new Date();
+    this.currentTime = this.date.getTime();
+    return this.currentTime;
+  }
 }

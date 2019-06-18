@@ -13,7 +13,7 @@ import { PublisherPage } from '../publisher/publisher';
 
 export class SearchPage {
 
-  searchType: string = "userSearch";
+  searchType: string = "publisherSearch";
   searchingUsers: boolean;
   searchingPublishers: boolean;
   userResults;
@@ -26,27 +26,27 @@ export class SearchPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private search: SearchProvider) {
-    this.showUserSearch()
+    this.showPublisherSearch();
   }
 
   ionViewDidLoad() {
     this.search.getUsers(this.startAt, this.endAt)
-      .subscribe(userResults => this.userResults = userResults)
+      .subscribe(userResults => this.userResults = userResults);
 
     this.search.getPublishers(this.startAt, this.endAt)
-      .subscribe(publisherResults => this.publisherResults = publisherResults)
+      .subscribe(publisherResults => this.publisherResults = publisherResults);
   }
 
   searchUsers($event) {
-    let q = $event.target.value
-    this.startAt.next(q)
-    this.endAt.next(q+"\uf8ff")
+    let q = $event.target.value;
+    this.startAt.next(q);
+    this.endAt.next(q+"\uf8ff");
   }
 
   searchPublishers($event) {
-    let q = $event.target.value
-    this.startAt.next(q)
-    this.endAt.next(q+"\uf8ff")
+    let q = $event.target.value;
+    this.startAt.next(q);
+    this.endAt.next(q+"\uf8ff");
   }
 
   ionSelected() {
@@ -54,11 +54,11 @@ export class SearchPage {
   }
 
   goToUserProfile(event, user) {
-    this.navCtrl.push(UserPage, user)
+    this.navCtrl.push(UserPage, user);
   }
 
   publisherPage(event, publisher) {
-    this.navCtrl.push(PublisherPage, publisher)
+    this.navCtrl.push(PublisherPage, publisher);
   }
 
   showUserSearch() {

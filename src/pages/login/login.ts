@@ -30,22 +30,18 @@ export class LoginPage {
   }
 
   userLogin() {
-    
     return this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-    .then(() => {
-      
+    .then(() => { 
       this.date = new Date();
       this.currentTime = this.date.getTime();
-      
-      let user = firebase.auth().currentUser
-      let uid = user.uid
-      
+      let user = firebase.auth().currentUser;
+      let uid = user.uid;
+      console.log("login: " + uid);
       const userData = this.db.object('user-data/' + uid);
-      userData.update({ signedIn: (this.currentTime)})
-      
+      userData.update({ signedIn: (this.currentTime)});
       this.navCtrl.push(TabsPage);
     })
     .catch(error => 
-      console.log(error));
+      console.log("login error: " + error));
   } 
 }

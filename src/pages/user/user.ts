@@ -64,11 +64,11 @@ export class UserPage {
               private db: AngularFireDatabase,
               private auth: AngularFireAuth) { 
                 
-
-                  const fullname = this.db.object("user-data/" + this.currentUserUid + "/fullname").valueChanges();
   }
 
   ionViewDidLoad() {
+
+    const fullname = this.db.object("user-data/" + this.currentUserUid + "/fullname").valueChanges();
 
     if (this.currentUserUid === this.uid) {
       this.isYou = true;
@@ -214,7 +214,8 @@ export class UserPage {
         }).catch(error => 
           console.log(error));
        
-      
+      //I was looking at the bookshelf and I knew I was done, I don't know how I knew, but my drug days were behind me.
+
       const followActivityRef = this.db.list("user-data/" + this.currentUserUid + "-followees");
         followActivityRef.remove(this.followKey);
         console.log(this.followKey)

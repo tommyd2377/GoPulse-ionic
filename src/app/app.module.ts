@@ -7,7 +7,6 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { PulsePage } from '../pages/pulse/pulse';
-import { AuthProvider } from '../providers/auth/auth';
 import { SearchProvider } from '../providers/search-model/search-model';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -82,7 +81,6 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
-    AuthProvider,
     ThemeableBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SearchProvider,
