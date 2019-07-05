@@ -52,7 +52,7 @@ export class PulsePage {
   constructor(public navCtrl: NavController,
               private http: Http,
               public publisher: publisherLists) {
-    this.triggerWorld()
+    this.triggerUS()
   }
 
   shuffleArticles(articles) {
@@ -64,7 +64,7 @@ export class PulsePage {
   }
 
   triggerUS() {
-    this.usArticles = "https://newsapi.org/v2/top-headlines?country=us&sortBy=popularity&pageSize=100&apiKey=" + this.apiKey;
+    this.usArticles = "https://newsapi.org/v2/top-headlines?country=us&apiKey=" + this.apiKey;
       this.http.get(this.usArticles)
         .map(res => res.json())
           .subscribe(

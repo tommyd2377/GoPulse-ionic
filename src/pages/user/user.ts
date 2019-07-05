@@ -47,13 +47,16 @@ export class UserPage {
   followees: Observable<any[]>;
   followeesTwo: Observable<any[]>;
 
+  //matches keys in afbd?
   fullname: string = this.navParams.get('fullname');
   displayName: string = this.navParams.get('displayName');
   uid: string = this.navParams.get('uid');
 
+  //matches keys in afbd?
   followeeUsername: string = this.navParams.get('followeeUsername');
   followeeFullname: string = this.navParams.get('followeeFullname');
   followeeUid: string = this.navParams.get('followeeUid');
+  //matches keys in afbd?
   
   followerUsername: string = this.navParams.get('followerUsername');
   followerFullname: string = this.navParams.get('followerFullname');
@@ -75,12 +78,15 @@ export class UserPage {
       console.log('this is you')
     }
     
+    //matches keys in afbd?
     this.followerUid;
     this.followerFullname;
     this.followerUsername;
+    
     this.followeeUid;
     this.followeeFullname;
     this.followeeUsername;
+    
     this.displayName;
     this.fullname;
     this.uid;
@@ -214,7 +220,7 @@ export class UserPage {
         }).catch(error => 
           console.log(error));
        
-      //I was looking at the bookshelf and I knew I was done, I don't know how I knew, but my drug days were behind me.
+    
 
       const followActivityRef = this.db.list("user-data/" + this.currentUserUid + "-followees");
         followActivityRef.remove(this.followKey);
@@ -259,4 +265,3 @@ export class UserPage {
   }
 
 }
-
