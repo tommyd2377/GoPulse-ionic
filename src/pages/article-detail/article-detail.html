@@ -30,8 +30,8 @@
       </button>
 
       <button ion-button icon-start color="secondary" clear>
-          <ion-icon name="swap"></ion-icon>
-          {{ (cMCount | async)?.length }}
+          <ion-icon name="text"></ion-icon>
+          0
         </button>
 
       <button ion-button icon-start color="secondary" clear (click)="directSend()">
@@ -43,7 +43,9 @@
 </div>
 
     <h2 class="white-text" padding>{{ title }}</h2>
-    <p class="white-text" padding>{{ content }}</p>
-  
-
+    <p class="white-text" padding>{{ description }}</p>
+  <div padding style="max-width: 600px; margin-right: auto; margin-left: auto">
+        <ion-textarea [(ngModel)]="message" type="text" placeholder="Say something smart .... "></ion-textarea>
+        <button padding ion-button color="secondary" outline  small float-right (click)="sendComment()">Post</button>
+  </div>
 </ion-content>
